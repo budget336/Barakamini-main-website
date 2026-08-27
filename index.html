@@ -631,6 +631,7 @@ function renderProducts(){
       <div class="product-body">
         <h3>${p.name}</h3>
         <p>${p.detail}</p>
+        <a class="btn-wa press" style="margin-top:10px; font-size:13px; padding:8px 14px;" target="_blank" rel="noreferrer" href="https://wa.me/${BRANCHES[state.branch].whatsapp}?text=${encodeURIComponent('Hi Baraka Mini Hardware, is the ' + p.name + ' available? I would like a quote.')}">Ask about this item</a>
       </div>
     </div>
   `).join('');
