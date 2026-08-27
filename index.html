@@ -748,7 +748,7 @@ const FALLBACK_SWATCHES = [
 async function fetchLiveProducts(){
   try{
     const res = await fetch(
-      `${SUPABASE_URL}/rest/v1/products?select=id,name,category,price,image_url,description`,
+      `${SUPABASE_URL}/rest/v1/products?select=id,name,category,price,image_url,description,size`,
       {
         headers: {
           "apikey": SUPABASE_ANON_KEY,
@@ -769,7 +769,7 @@ async function fetchLiveProducts(){
           name: row.name,
           detail: row.description || "",
           swatch: row.image_url ? `url('${row.image_url}') center/cover` : FALLBACK_SWATCHES[i % FALLBACK_SWATCHES.length],
-          meta: row.price ? `KES ${Number(row.price).toLocaleString()}` : ""
+          meta: [row.size, row.price ? `KES ${Number(row.price).toLocaleString()}` : ""].filter(Boolean).join(" · ")
         };
       })
       .filter(Boolean);
