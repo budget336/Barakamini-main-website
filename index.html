@@ -544,24 +544,7 @@ const CATEGORIES = [
   { id:"hardware", label:"Cabinetry & Joinery Hardware", short:"Hardware" }
 ];
 
-const PRODUCTS = [
-  { id:1, cat:"mattress", name:"Orthopedic Support King", detail:"High-density reinforced foam core, 8-inch profile, firm orthopedic support.", swatch:"linear-gradient(135deg,#EDE3D0,#D9C8A8)", meta:"6 x 6 ft · Firm" },
-  { id:2, cat:"mattress", name:"Cloud Density Queen", detail:"Layered high-density foam with a plush quilted cover, medium-soft feel.", swatch:"linear-gradient(135deg,#F2ECDD,#E2D2B4)", meta:"5 x 6.25 ft · Medium" },
-  { id:3, cat:"mattress", name:"Custom-Cut Cushion Set", detail:"Any shape, any density — cut to your seat frame and covered on request.", swatch:"linear-gradient(135deg,#E7DCC6,#C9A15D)", meta:"Made to size" },
-  { id:4, cat:"mattress", name:"Firm Traveller Single", detail:"Compact high-density foam, ideal for guest rooms and boarding students.", swatch:"linear-gradient(135deg,#EFE6D4,#D4C19B)", meta:"3 x 6 ft · Firm" },
-  { id:5, cat:"fabric", name:"Heavy Chinese Textile", detail:"Dense woven upholstery cloth built for daily-use sofas and dining chairs.", swatch:"linear-gradient(135deg,#3B2A20,#5C4531)", meta:"150cm width · Heavy" },
-  { id:6, cat:"fabric", name:"Light Chinese Fabric", detail:"Softer weave for cushions, headboards and low-traffic accent pieces.", swatch:"linear-gradient(135deg,#8C6A4E,#B8916A)", meta:"150cm width · Light" },
-  { id:7, cat:"fabric", name:"Crushed Velvet", detail:"Deep-pile velvet with a soft light-catching finish for statement furniture.", swatch:"linear-gradient(135deg,#1F4A44,#2F6A61)", meta:"140cm width · Luxury" },
-  { id:8, cat:"fabric", name:"Waxed Canvas Drapery", detail:"Structured canvas for curtains, outdoor cushions and durable drapery.", swatch:"linear-gradient(135deg,#C9A15D,#8C6A4E)", meta:"160cm width · Heavy" },
-  { id:9, cat:"leather", name:"Genuine Top-Grain Leather", detail:"Full-grain hide with natural texture, for sofas and executive seating.", swatch:"linear-gradient(135deg,#4A2E1E,#6B4530)", meta:"Per hide · Premium" },
-  { id:10, cat:"leather", name:"Heavy-Duty Faux Leather", detail:"Commercial-grade synthetic built to resist cracking and daily wear.", swatch:"linear-gradient(135deg,#2B211B,#463228)", meta:"137cm width · Durable" },
-  { id:11, cat:"leather", name:"Vinyl Texture Roll", detail:"Wipeable vinyl finish suited to dining seating and commercial spaces.", swatch:"linear-gradient(135deg,#5C4531,#7A5A3D)", meta:"137cm width · Wipeable" },
-  { id:12, cat:"leather", name:"Pebble-Grain Synthetic", detail:"Textured grain finish that mimics leather at a fraction of the cost.", swatch:"linear-gradient(135deg,#8C6A4E,#3B2A20)", meta:"137cm width · Value" },
-  { id:13, cat:"hardware", name:"Brushed Copper Handles", detail:"Solid-cast cabinet pulls with a warm brushed-copper finish.", swatch:"linear-gradient(135deg,#B87A4A,#C9A15D)", meta:"Sold per piece" },
-  { id:14, cat:"hardware", name:"Heavy-Duty Soft-Close Hinges", detail:"Rated for daily commercial use with a controlled soft-close action.", swatch:"linear-gradient(135deg,#221D1A,#3B2A20)", meta:"Sold per pair" },
-  { id:15, cat:"hardware", name:"Drawer Slider Rails", detail:"Full-extension steel rails rated for heavy drawer loads.", swatch:"linear-gradient(135deg,#4A4038,#221D1A)", meta:"18in / 24in" },
-  { id:16, cat:"hardware", name:"Luxury Wardrobe Handles", detail:"Statement handles in matte gold for wardrobes and feature cabinetry.", swatch:"linear-gradient(135deg,#C9A15D,#8C6A4E)", meta:"Sold per piece" }
-];
+let PRODUCTS = []; // populated live from Supabase on page load
 
 const ITEM_TYPES = [
   { id:"sofa1", label:"1-Seater Sofa Chair", base:3.0, unit:"seat" },
@@ -741,14 +724,72 @@ function initWordSwap(){
   }, 2400);
 }
 
+/* ================= LIVE PRODUCT FETCH ================= */
+const SUPABASE_URL = "https://epvswsismwpkakztoijk.supabase.co";
+const SUPABASE_ANON_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImVwdnN3c2lzbXdwa2FrenRvaWprIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODc4MTQxNzUsImV4cCI6MjEwMzM5MDE3NX0.mH_Ur3pXf989hj_N3CwmxWGDpmsQF2-i4l903jbPRWI";
+
+// Maps the database's real category names to this site's internal short IDs
+const CATEGORY_NAME_TO_ID = {
+  "Mattresses & Cushions": "mattress",
+  "Premium Fabrics": "fabric",
+  "Elite Furniture Leather": "leather",
+  "Cabinetry & Joinery Hardware": "hardware"
+};
+
+// A small set of neutral gradients to cycle through for products with no image_url
+const FALLBACK_SWATCHES = [
+  "linear-gradient(135deg,#EDE3D0,#D9C8A8)",
+  "linear-gradient(135deg,#8C6A4E,#B8916A)",
+  "linear-gradient(135deg,#3B2A20,#5C4531)",
+  "linear-gradient(135deg,#C9A15D,#8C6A4E)"
+];
+
+async function fetchLiveProducts(){
+  try{
+    const res = await fetch(
+      `${SUPABASE_URL}/rest/v1/products?select=id,name,category,price,image_url,description`,
+      {
+        headers: {
+          "apikey": SUPABASE_ANON_KEY,
+          "Authorization": `Bearer ${SUPABASE_ANON_KEY}`
+        }
+      }
+    );
+    if (!res.ok) throw new Error(`Fetch failed: ${res.status}`);
+    const rows = await res.json();
+
+    PRODUCTS = rows
+      .map((row, i) => {
+        const catId = CATEGORY_NAME_TO_ID[row.category];
+        if (!catId) return null; // skip anything with an unrecognized category
+        return {
+          id: row.id,
+          cat: catId,
+          name: row.name,
+          detail: row.description || "",
+          swatch: row.image_url ? `url('${row.image_url}') center/cover` : FALLBACK_SWATCHES[i % FALLBACK_SWATCHES.length],
+          meta: row.price ? `KES ${Number(row.price).toLocaleString()}` : ""
+        };
+      })
+      .filter(Boolean);
+  }catch(err){
+    console.error("Could not load live products, falling back to empty catalog:", err);
+    PRODUCTS = [];
+  }
+}
+
 /* ================= INIT ================= */
-renderBranch();
-renderCatTabs();
-renderProducts();
-renderItemGrid();
-renderTierGrid();
-updateCalc();
-initWordSwap();
+async function init(){
+  await fetchLiveProducts();
+  renderBranch();
+  renderCatTabs();
+  renderProducts();
+  renderItemGrid();
+  renderTierGrid();
+  updateCalc();
+  initWordSwap();
+}
+init();
 document.getElementById('yearSpan').textContent = `© ${new Date().getFullYear()} Baraka Mini Hardware. All rights reserved.`;
 </script>
 
