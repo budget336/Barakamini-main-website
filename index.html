@@ -1,0 +1,756 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Baraka Mini Hardware — Kabarnet, Baringo</title>
+<meta name="description" content="Premium mattresses, designer fabrics, elite leather and cabinetry hardware in Kabarnet, Baringo County." />
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,450;0,9..144,600;0,9..144,700;1,9..144,500&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --alabaster:#F5F0E6;
+    --alabaster-deep:#EFE6D4;
+    --espresso:#3B2A20;
+    --charcoal:#221D1A;
+    --copper:#B87A4A;
+    --gold:#C9A15D;
+    --ink-soft:rgba(34,29,26,0.7);
+  }
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    margin:0;
+    background:var(--alabaster);
+    color:var(--charcoal);
+    font-family:'Inter',sans-serif;
+    -webkit-font-smoothing:antialiased;
+  }
+  h1,h2,h3,.font-display{font-family:'Fraunces',serif;}
+  a{color:inherit;text-decoration:none;}
+  button{font-family:inherit;cursor:pointer;}
+  img{max-width:100%;display:block;}
+  .wrap{max-width:1200px;margin:0 auto;padding:0 20px;}
+
+  /* ---------- utility ---------- */
+  .eyebrow{display:flex;align-items:center;gap:12px;margin-bottom:16px;}
+  .eyebrow .line{height:1px;width:32px;background:var(--copper);}
+  .eyebrow span{text-transform:uppercase;letter-spacing:.22em;font-size:11px;font-weight:600;color:var(--copper);}
+  .stitch{border:none;border-top:1.5px dashed rgba(140,106,78,.5);margin:28px 0;opacity:.6;}
+  .press{transition:transform .15s ease;}
+  .press:active{transform:scale(.97);}
+
+  /* ---------- header ---------- */
+  header{
+    position:sticky;top:0;z-index:40;
+    background:rgba(245,240,230,0.92);
+    backdrop-filter:blur(10px);
+    border-bottom:1px solid rgba(34,29,26,.1);
+  }
+  .nav-inner{height:76px;display:flex;align-items:center;justify-content:space-between;}
+  .brand{display:flex;align-items:center;gap:12px;}
+  .brand-mark{width:40px;height:40px;border-radius:50%;background:var(--espresso);display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+  .brand-mark span{font-family:'Fraunces',serif;color:var(--gold);font-size:18px;}
+  .brand-name{font-family:'Fraunces',serif;font-size:17px;letter-spacing:.02em;line-height:1.2;}
+  .brand-sub{font-size:10px;text-transform:uppercase;letter-spacing:.18em;color:#8C6A4E;}
+  nav.links{display:flex;align-items:center;gap:32px;font-size:13px;font-weight:500;}
+  nav.links button{background:none;border:none;color:inherit;font-size:13px;font-weight:500;position:relative;padding:4px 0;}
+  nav.links button::after{content:'';position:absolute;left:0;right:0;bottom:-2px;height:2px;background:var(--copper);transform:scaleX(0);transform-origin:left;transition:transform .3s ease;}
+  nav.links button:hover::after{transform:scaleX(1);}
+  .btn-wa{
+    display:inline-flex;align-items:center;gap:8px;
+    background:var(--espresso);color:var(--alabaster);
+    padding:10px 18px;border-radius:999px;font-size:13px;font-weight:600;
+    transition:background .2s ease;
+  }
+  .btn-wa:hover{background:var(--charcoal);}
+  .menu-btn{display:none;background:none;border:none;padding:8px;}
+  .menu-btn span{display:block;width:24px;height:2px;background:var(--charcoal);margin:5px 0;transition:transform .25s ease, opacity .25s ease;}
+  .mobile-menu{display:none;flex-direction:column;gap:16px;padding:16px 20px 20px;border-top:1px solid rgba(34,29,26,.1);}
+  .mobile-menu button{background:none;border:none;text-align:left;font-size:14px;font-weight:500;color:inherit;padding:0;}
+  .mobile-menu.open{display:flex;}
+
+  /* ---------- hero ---------- */
+  .hero{position:relative;overflow:hidden;}
+  .hero-grid{display:grid;grid-template-columns:1.15fr .85fr;gap:56px;align-items:end;padding:56px 0 96px;}
+  .hero h1{font-weight:400;font-size:58px;line-height:.98;letter-spacing:-.01em;margin:0 0 28px;}
+  .hero h1 i{font-style:italic;color:#8C6A4E;}
+  .word-swap-wrap{position:relative;display:inline-block;min-width:260px;vertical-align:baseline;height:1em;overflow:hidden;}
+  .word-swap{color:var(--copper);display:inline-block;position:absolute;left:0;top:0;opacity:0;transform:translateY(14px);transition:opacity .5s ease, transform .5s ease;white-space:nowrap;}
+  .word-swap.is-active{opacity:1;transform:translateY(0);}
+  .word-swap.is-leaving{opacity:0;transform:translateY(-14px);}
+  .word-swap.is-entering{opacity:0;transform:translateY(14px);}
+  .hero p.lead{max-width:560px;font-size:16px;line-height:1.7;color:rgba(59,42,32,.8);margin:0 0 34px;}
+  .hero-ctas{display:flex;flex-wrap:wrap;gap:16px;}
+  .btn-primary{background:var(--charcoal);color:var(--alabaster);padding:14px 28px;border-radius:999px;font-size:14px;font-weight:600;border:none;transition:background .2s ease;}
+  .btn-primary:hover{background:var(--espresso);}
+  .btn-outline{border:1px solid rgba(34,29,26,.3);padding:14px 28px;border-radius:999px;font-size:14px;font-weight:600;background:transparent;transition:all .2s ease;}
+  .btn-outline:hover{border-color:var(--charcoal);background:rgba(255,255,255,.4);}
+
+  .swatch-rail{display:flex;gap:16px;overflow-x:auto;padding-bottom:12px;}
+  .swatch-rail::-webkit-scrollbar{height:6px;}
+  .swatch-rail::-webkit-scrollbar-thumb{background:rgba(184,122,74,.35);border-radius:99px;}
+  .swatch-card{
+    flex-shrink:0;width:140px;border-radius:3px;
+    border:1px dashed rgba(140,106,78,.5);
+    padding:8px;background:var(--alabaster-deep);
+    transition:transform .45s cubic-bezier(.2,.8,.2,1), box-shadow .45s ease;
+  }
+  .swatch-card:hover{transform:translateY(-8px);box-shadow:0 24px 48px -18px rgba(34,29,26,.35);}
+  .swatch-fill{height:150px;border-radius:2px;}
+  .swatch-label{margin-top:8px;font-size:11px;font-weight:500;color:var(--espresso);line-height:1.3;}
+  .swatch-caption{margin-top:12px;font-size:11px;text-transform:uppercase;letter-spacing:.16em;color:#8C6A4E;}
+
+  /* ---------- branch toggle ---------- */
+  section.branches{padding:0 0 80px;scroll-margin-top:80px;}
+  .section-title{font-weight:400;font-size:34px;margin:0 0 28px;}
+  .toggle-group{display:inline-flex;padding:4px;border-radius:999px;background:var(--alabaster-deep);border:1px solid rgba(34,29,26,.1);margin-bottom:32px;}
+  .toggle-btn{
+    padding:10px 22px;border-radius:999px;border:none;background:transparent;
+    font-size:13px;font-weight:600;color:rgba(59,42,32,.7);
+    transition:all .3s ease;
+  }
+  .toggle-btn.active{background:var(--charcoal);color:var(--alabaster);box-shadow:0 4px 12px rgba(0,0,0,.15);}
+
+  .branch-card{
+    display:grid;grid-template-columns:1fr 1fr;border-radius:16px;overflow:hidden;
+    border:1px solid rgba(34,29,26,.1);
+    box-shadow:0 20px 60px -30px rgba(34,29,26,.35);
+    animation:fadeUp .5s cubic-bezier(.2,.7,.2,1) both;
+  }
+  @keyframes fadeUp{from{opacity:0;transform:translateY(14px);}to{opacity:1;transform:translateY(0);}}
+  .branch-left{background:var(--charcoal);color:var(--alabaster);padding:40px;position:relative;overflow:hidden;}
+  .branch-left .glow{position:absolute;right:-40px;top:-40px;width:160px;height:160px;border-radius:50%;background:rgba(184,122,74,.1);}
+  .branch-tag{text-transform:uppercase;letter-spacing:.2em;font-size:10px;color:var(--gold);font-weight:600;}
+  .branch-left h3{font-size:28px;margin:8px 0 16px;}
+  .branch-left p.focus{font-size:14px;line-height:1.7;color:rgba(245,240,230,.75);margin:0 0 24px;max-width:420px;}
+  .branch-row{display:flex;align-items:flex-start;gap:12px;margin-bottom:16px;font-size:14px;}
+  .branch-row svg{flex-shrink:0;margin-top:2px;color:var(--gold);}
+  .branch-row a{font-weight:500;transition:color .2s ease;}
+  .branch-row a:hover{color:var(--gold);}
+  .btn-gold{display:inline-flex;align-items:center;gap:8px;background:var(--gold);color:var(--charcoal);padding:10px 20px;border-radius:999px;font-size:13px;font-weight:700;transition:background .2s ease;}
+  .btn-gold:hover{background:var(--copper);}
+
+  .branch-right{background:var(--alabaster-deep);padding:40px;}
+  .col-label{text-transform:uppercase;letter-spacing:.18em;font-size:11px;font-weight:600;color:#8C6A4E;margin:0 0 16px;}
+  .hours-row{display:flex;justify-content:space-between;font-size:14px;padding-bottom:8px;margin-bottom:8px;border-bottom:1px dashed rgba(140,106,78,.3);}
+  .hours-row span:first-child{color:rgba(59,42,32,.7);}
+  .hours-row span:last-child{font-weight:500;}
+  .stock-list{list-style:none;padding:0;margin:24px 0 0;}
+  .stock-list li{display:flex;align-items:center;gap:10px;font-size:14px;margin-bottom:10px;}
+  .stock-list li::before{content:'';width:6px;height:6px;border-radius:50%;background:var(--copper);flex-shrink:0;}
+
+  /* ---------- catalog ---------- */
+  section.catalog{background:rgba(239,230,212,.6);border-top:1px solid rgba(34,29,26,.1);border-bottom:1px solid rgba(34,29,26,.1);padding:80px 0;scroll-margin-top:80px;}
+  .cat-tabs{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:40px;}
+  .cat-tab{padding:10px 20px;border-radius:999px;border:1px solid rgba(34,29,26,.2);background:transparent;font-size:13px;font-weight:600;color:var(--espresso);transition:all .3s ease;}
+  .cat-tab:hover{border-color:rgba(34,29,26,.5);}
+  .cat-tab.active{background:var(--charcoal);color:var(--alabaster);border-color:var(--charcoal);}
+  .product-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:24px;}
+  .product-card{border-radius:4px;overflow:hidden;background:var(--alabaster);border:1px solid rgba(34,29,26,.1);transition:transform .45s cubic-bezier(.2,.8,.2,1), box-shadow .45s ease;animation:fadeUp .5s cubic-bezier(.2,.7,.2,1) both;}
+  .product-card:hover{transform:translateY(-8px);box-shadow:0 24px 48px -18px rgba(34,29,26,.35);}
+  .product-img{height:160px;position:relative;overflow:hidden;}
+  .product-fill{position:absolute;inset:0;transition:transform .5s ease;}
+  .product-card:hover .product-fill{transform:scale(1.1);}
+  .product-meta{position:absolute;top:8px;right:8px;background:rgba(245,240,230,.9);backdrop-filter:blur(4px);padding:2px 10px;border-radius:999px;font-size:9px;font-weight:600;text-transform:uppercase;letter-spacing:.05em;color:var(--espresso);}
+  .product-body{padding:16px;}
+  .product-body h3{font-size:16px;margin:0 0 4px;}
+  .product-body p{font-size:12px;color:rgba(59,42,32,.65);margin:0;line-height:1.5;}
+  .catalog-cta{display:flex;justify-content:center;margin-top:40px;}
+
+  /* ---------- calculator ---------- */
+  section.calc{padding:80px 0;scroll-margin-top:80px;}
+  .calc-intro{font-size:15px;color:rgba(59,42,32,.7);max-width:640px;margin:0 0 40px;}
+  .calc-card{display:grid;grid-template-columns:1.1fr .9fr;border-radius:16px;overflow:hidden;border:1px solid rgba(34,29,26,.1);box-shadow:0 20px 60px -30px rgba(34,29,26,.35);}
+  .calc-left{background:var(--alabaster);padding:40px;}
+  .calc-block{margin-bottom:32px;}
+  .calc-block:last-child{margin-bottom:0;}
+  .opt-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;}
+  .opt-btn{text-align:left;padding:12px 16px;border-radius:4px;border:1px solid rgba(34,29,26,.15);background:transparent;font-size:13px;font-weight:500;color:var(--charcoal);transition:all .25s ease;}
+  .opt-btn:hover{border-color:rgba(34,29,26,.4);}
+  .opt-btn.active{background:var(--charcoal);color:var(--alabaster);border-color:var(--charcoal);}
+  .tier-btn{width:100%;text-align:left;padding:12px 16px;border-radius:4px;border:1px solid rgba(34,29,26,.15);background:transparent;margin-bottom:8px;transition:all .25s ease;display:block;}
+  .tier-btn:hover{border-color:rgba(34,29,26,.4);}
+  .tier-btn.active{background:var(--charcoal);color:var(--alabaster);border-color:var(--charcoal);}
+  .tier-btn .t-label{display:block;font-size:13px;font-weight:500;}
+  .tier-btn .t-note{display:block;font-size:11px;margin-top:2px;color:rgba(59,42,32,.5);}
+  .tier-btn.active .t-note{color:rgba(245,240,230,.6);}
+  .qty-label{display:flex;justify-content:space-between;text-transform:uppercase;letter-spacing:.18em;font-size:11px;font-weight:600;color:#8C6A4E;margin-bottom:12px;}
+  .qty-label b{color:var(--charcoal);font-size:13px;}
+  input[type=range]{width:100%;-webkit-appearance:none;background:transparent;}
+  input[type=range]::-webkit-slider-runnable-track{height:4px;border-radius:99px;background:#D9C8A8;}
+  input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:20px;height:20px;border-radius:999px;background:var(--copper);border:3px solid var(--alabaster);box-shadow:0 0 0 1px var(--copper);cursor:pointer;margin-top:-8px;}
+  input[type=range]::-moz-range-track{height:4px;border-radius:99px;background:#D9C8A8;}
+  input[type=range]::-moz-range-thumb{width:14px;height:14px;border-radius:999px;background:var(--copper);border:3px solid var(--alabaster);box-shadow:0 0 0 1px var(--copper);cursor:pointer;}
+  .qty-scale{display:flex;justify-content:space-between;font-size:10px;color:rgba(59,42,32,.4);margin-top:4px;}
+
+  .calc-right{background:var(--charcoal);color:var(--alabaster);padding:40px;display:flex;flex-direction:column;justify-content:space-between;}
+  .calc-right .label{text-transform:uppercase;letter-spacing:.18em;font-size:10px;font-weight:600;color:var(--gold);}
+  .calc-result{font-family:'Fraunces',serif;font-size:64px;margin:16px 0 8px;animation:fadeUp .4s ease both;}
+  .calc-result span{font-size:26px;color:var(--gold);margin-left:6px;}
+  .calc-right .desc{font-size:13px;color:rgba(245,240,230,.6);margin:0 0 28px;line-height:1.6;}
+  .calc-right .desc b{color:var(--alabaster);font-weight:500;}
+  .summary-row{display:flex;justify-content:space-between;font-size:14px;margin-bottom:10px;}
+  .summary-row span:first-child{color:rgba(245,240,230,.6);}
+  .summary-row span:last-child{font-weight:500;}
+  .btn-gold-full{width:100%;display:inline-flex;align-items:center;justify-content:center;gap:8px;background:var(--gold);color:var(--charcoal);padding:14px 24px;border-radius:999px;font-size:14px;font-weight:700;transition:background .2s ease;margin-top:24px;}
+  .btn-gold-full:hover{background:var(--copper);}
+
+  /* ---------- partner hub ---------- */
+  section.partners{padding:80px 0;}
+  .partner-grid{display:grid;grid-template-columns:.9fr 1.1fr;gap:56px;align-items:center;}
+  .partner-grid h2{font-size:34px;line-height:1.15;margin:0 0 20px;}
+  .partner-grid p{font-size:15px;line-height:1.7;color:rgba(59,42,32,.8);margin:0 0 32px;}
+  .feature-grid{display:grid;grid-template-columns:1fr 1fr;gap:20px;}
+  .feature-card{padding:24px;border-radius:4px;background:var(--alabaster-deep);border:1px solid rgba(34,29,26,.1);transition:transform .45s cubic-bezier(.2,.8,.2,1), box-shadow .45s ease;}
+  .feature-card:hover{transform:translateY(-8px);box-shadow:0 24px 48px -18px rgba(34,29,26,.35);}
+  .feature-icon{width:44px;height:44px;border-radius:50%;background:var(--charcoal);color:var(--gold);display:flex;align-items:center;justify-content:center;margin-bottom:16px;}
+  .feature-card h3{font-size:17px;margin:0 0 6px;}
+  .feature-card p{font-size:13px;line-height:1.6;color:rgba(59,42,32,.7);margin:0;}
+
+  /* ---------- footer ---------- */
+  footer{background:var(--charcoal);color:var(--alabaster);}
+  .footer-top{padding:64px 0 32px;}
+  .footer-grid{display:grid;grid-template-columns:1.2fr 1fr 1fr 1fr;gap:48px;margin-bottom:56px;}
+  .foot-brand{display:flex;align-items:center;gap:12px;margin-bottom:16px;}
+  .foot-mark{width:36px;height:36px;border-radius:50%;background:var(--gold);display:flex;align-items:center;justify-content:center;}
+  .foot-mark span{font-family:'Fraunces',serif;color:var(--charcoal);font-size:16px;}
+  .foot-name{font-family:'Fraunces',serif;font-size:18px;}
+  .foot-desc{font-size:13px;line-height:1.7;color:rgba(245,240,230,.6);}
+  .foot-heading{text-transform:uppercase;letter-spacing:.18em;font-size:11px;font-weight:600;color:var(--gold);margin:0 0 16px;}
+  .foot-phone{display:flex;align-items:center;gap:8px;font-size:14px;margin-bottom:14px;transition:color .2s ease;}
+  .foot-phone:hover{color:var(--gold);}
+  .foot-email{display:flex;align-items:center;gap:8px;font-size:13px;margin-bottom:14px;color:rgba(245,240,230,.75);transition:color .2s ease;word-break:break-all;}
+  .foot-email:hover{color:var(--gold);}
+  .foot-hours{margin-bottom:14px;}
+  .foot-hours-row{display:flex;justify-content:space-between;font-size:12px;color:rgba(245,240,230,.6);gap:16px;margin-bottom:6px;}
+  .foot-wa{display:inline-flex;align-items:center;gap:6px;font-size:12px;font-weight:600;color:var(--gold);transition:color .2s ease;}
+  .foot-wa:hover{color:var(--copper);}
+  .social-row{display:flex;gap:12px;}
+  .social-icon{width:36px;height:36px;border-radius:50%;border:1px solid rgba(245,240,230,.2);display:flex;align-items:center;justify-content:center;transition:background .2s ease;}
+  .social-icon:hover{background:rgba(245,240,230,.1);}
+  .footer-bottom{border-top:1px solid rgba(245,240,230,.1);padding:24px 0;display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px;font-size:11px;color:rgba(245,240,230,.4);}
+
+  /* ---------- responsive ---------- */
+  @media (max-width: 860px){
+    nav.links{display:none;}
+    .menu-btn{display:block;}
+    .hero-grid{grid-template-columns:1fr;gap:40px;padding:40px 0 64px;}
+    .hero h1{font-size:42px;}
+    .word-swap-wrap{min-width:180px;}
+    .branch-card{grid-template-columns:1fr;}
+    .product-grid{grid-template-columns:repeat(2,1fr);}
+    .calc-card{grid-template-columns:1fr;}
+    .partner-grid{grid-template-columns:1fr;}
+    .feature-grid{grid-template-columns:1fr 1fr;}
+    .footer-grid{grid-template-columns:1fr 1fr;gap:32px;}
+  }
+  @media (max-width: 520px){
+    .hero h1{font-size:34px;}
+    .opt-grid{grid-template-columns:1fr;}
+    .feature-grid{grid-template-columns:1fr;}
+    .footer-grid{grid-template-columns:1fr;}
+    .product-grid{grid-template-columns:1fr 1fr;}
+  }
+
+  @media (prefers-reduced-motion: reduce){
+    .word-swap{transition:none;}
+    .swatch-card:hover,.product-card:hover,.feature-card:hover{transform:none;}
+  }
+</style>
+</head>
+<body>
+
+<!-- ============ HEADER ============ -->
+<header>
+  <div class="wrap nav-inner">
+    <div class="brand">
+      <div class="brand-mark"><span>B</span></div>
+      <div>
+        <div class="brand-name">Baraka Mini Hardware</div>
+        <div class="brand-sub">Kabarnet, Baringo</div>
+      </div>
+    </div>
+    <nav class="links">
+      <button onclick="scrollToId('catalog')">Departments</button>
+      <button onclick="scrollToId('calculator')">Fabric Calculator</button>
+      <button onclick="scrollToId('branches')">Branches</button>
+      <a class="btn-wa press" href="https://wa.me/254723068125" target="_blank" rel="noreferrer">
+        <svg viewBox="0 0 24 24" fill="currentColor" width="16" height="16"><path d="M17.47 14.38c-.29-.14-1.71-.84-1.97-.94-.27-.1-.46-.14-.66.14-.2.29-.75.94-.92 1.13-.17.2-.34.22-.63.07-.29-.14-1.22-.45-2.32-1.43-.86-.76-1.44-1.71-1.6-2-.17-.29-.02-.44.13-.59.13-.13.29-.34.43-.5.14-.17.19-.29.29-.48.1-.2.05-.37-.02-.51-.07-.14-.66-1.59-.9-2.18-.24-.57-.48-.5-.66-.51h-.56c-.2 0-.51.07-.78.37-.27.29-1.02 1-1.02 2.44s1.05 2.83 1.19 3.02c.14.2 2.06 3.15 5 4.41.7.3 1.24.48 1.67.62.7.22 1.34.19 1.84.12.56-.08 1.71-.7 1.96-1.38.24-.68.24-1.26.17-1.38-.07-.12-.26-.2-.55-.34z"/><path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.75.46 3.45 1.32 4.95L2.05 22l5.29-1.39a9.87 9.87 0 0 0 4.7 1.2h.01c5.46 0 9.9-4.45 9.9-9.9C21.96 6.45 17.5 2 12.04 2zm0 18.1h-.01a8.2 8.2 0 0 1-4.19-1.15l-.3-.18-3.14.82.84-3.06-.2-.31a8.2 8.2 0 0 1-1.26-4.4c0-4.54 3.7-8.24 8.26-8.24 2.2 0 4.28.86 5.84 2.42a8.2 8.2 0 0 1 2.42 5.83c0 4.55-3.7 8.27-8.26 8.27z"/></svg>
+        WhatsApp Us
+      </a>
+    </nav>
+    <button class="menu-btn" onclick="toggleMenu()" aria-label="Toggle menu">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+  <div class="mobile-menu" id="mobileMenu">
+    <button onclick="scrollToId('catalog');toggleMenu()">Departments</button>
+    <button onclick="scrollToId('calculator');toggleMenu()">Fabric Calculator</button>
+    <button onclick="scrollToId('branches');toggleMenu()">Branches</button>
+    <a class="btn-wa press" style="justify-content:center" href="https://wa.me/254723068125" target="_blank" rel="noreferrer">WhatsApp Us</a>
+  </div>
+</header>
+
+<!-- ============ HERO ============ -->
+<section class="hero">
+  <div class="wrap hero-grid">
+    <div>
+      <div class="eyebrow"><span class="line"></span><span>Kabarnet's Interior &amp; Upholstery House</span></div>
+      <h1>
+        Transforming Baringo interiors,<br>
+        <i>one</i>
+        <span class="word-swap-wrap" id="wordSwapWrap">
+          <span class="word-swap is-active">Mattresses.</span>
+          <span class="word-swap">Fabrics.</span>
+          <span class="word-swap">Leather.</span>
+          <span class="word-swap">Hardware.</span>
+        </span>
+      </h1>
+      <p class="lead">From orthopedic mattresses to heavyweight Chinese textiles, genuine leather and cabinetry hardware — Baraka Mini Hardware supplies homeowners, tailors and carpenters across Baringo County with materials built to last.</p>
+      <div class="hero-ctas">
+        <button class="btn-primary press" onclick="scrollToId('catalog')">Browse Fabrics &amp; Leather</button>
+        <button class="btn-outline press" onclick="scrollToId('branches')">Find Our Branches</button>
+      </div>
+    </div>
+    <div>
+      <div class="swatch-rail">
+        <div class="swatch-card"><div class="swatch-fill" style="background:linear-gradient(160deg,#3B2A20,#5C4531)"></div><div class="swatch-label">Heavy Chinese Textile</div></div>
+        <div class="swatch-card"><div class="swatch-fill" style="background:linear-gradient(160deg,#1F4A44,#2F6A61)"></div><div class="swatch-label">Crushed Velvet</div></div>
+        <div class="swatch-card"><div class="swatch-fill" style="background:linear-gradient(160deg,#4A2E1E,#6B4530)"></div><div class="swatch-label">Genuine Leather</div></div>
+        <div class="swatch-card"><div class="swatch-fill" style="background:linear-gradient(160deg,#B87A4A,#C9A15D)"></div><div class="swatch-label">Brushed Copper Hardware</div></div>
+      </div>
+      <p class="swatch-caption">A glimpse from our swatch library — 200+ materials in-store</p>
+    </div>
+  </div>
+</section>
+
+<!-- ============ BRANCH TOGGLE ============ -->
+<section class="branches wrap" id="branches">
+  <div class="eyebrow"><span class="line"></span><span>Two Branches, One Standard</span></div>
+  <h2 class="section-title">Choose your nearest showroom</h2>
+
+  <div class="toggle-group">
+    <button class="toggle-btn active press" id="tabTown" onclick="setBranch('town')">Kabarnet Town Branch</button>
+    <button class="toggle-btn press" id="tabMarket" onclick="setBranch('market')">Kabarnet Market Branch</button>
+  </div>
+
+  <div class="branch-card" id="branchCard">
+    <!-- filled by JS -->
+  </div>
+</section>
+
+<!-- ============ CATALOG ============ -->
+<section class="catalog" id="catalog">
+  <div class="wrap">
+    <div class="eyebrow"><span class="line"></span><span>The Departments</span></div>
+    <h2 class="section-title">Every material under one roof</h2>
+
+    <div class="cat-tabs" id="catTabs"></div>
+    <div class="product-grid" id="productGrid"></div>
+
+    <div class="catalog-cta">
+      <a class="btn-outline press" id="catalogWaBtn" style="display:inline-flex;align-items:center;gap:8px" href="#" target="_blank" rel="noreferrer">
+        <svg viewBox="0 0 24 24" fill="currentColor" width="16" height="16"><path d="M17.47 14.38c-.29-.14-1.71-.84-1.97-.94-.27-.1-.46-.14-.66.14-.2.29-.75.94-.92 1.13-.17.2-.34.22-.63.07-.29-.14-1.22-.45-2.32-1.43-.86-.76-1.44-1.71-1.6-2-.17-.29-.02-.44.13-.59.13-.13.29-.34.43-.5.14-.17.19-.29.29-.48.1-.2.05-.37-.02-.51-.07-.14-.66-1.59-.9-2.18-.24-.57-.48-.5-.66-.51h-.56c-.2 0-.51.07-.78.37-.27.29-1.02 1-1.02 2.44s1.05 2.83 1.19 3.02c.14.2 2.06 3.15 5 4.41.7.3 1.24.48 1.67.62.7.22 1.34.19 1.84.12.56-.08 1.71-.7 1.96-1.38.24-.68.24-1.26.17-1.38-.07-.12-.26-.2-.55-.34z"/><path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.75.46 3.45 1.32 4.95L2.05 22l5.29-1.39a9.87 9.87 0 0 0 4.7 1.2h.01c5.46 0 9.9-4.45 9.9-9.9C21.96 6.45 17.5 2 12.04 2zm0 18.1h-.01a8.2 8.2 0 0 1-4.19-1.15l-.3-.18-3.14.82.84-3.06-.2-.31a8.2 8.2 0 0 1-1.26-4.4c0-4.54 3.7-8.24 8.26-8.24 2.2 0 4.28.86 5.84 2.42a8.2 8.2 0 0 1 2.42 5.83c0 4.55-3.7 8.27-8.26 8.27z"/></svg>
+        <span id="catalogWaLabel">Ask about Mattresses</span>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ============ CALCULATOR ============ -->
+<section class="calc wrap" id="calculator">
+  <div class="eyebrow"><span class="line"></span><span>Plan Your Order</span></div>
+  <h2 class="section-title" style="margin-bottom:12px">Upholstery &amp; fabric calculator</h2>
+  <p class="calc-intro">For tailors, carpenters and homeowners — get an instant material estimate before you visit, then confirm exact pricing and stock over WhatsApp.</p>
+
+  <div class="calc-card">
+    <div class="calc-left">
+      <div class="calc-block">
+        <div class="col-label" style="margin-bottom:12px">1. Item Type</div>
+        <div class="opt-grid" id="itemGrid"></div>
+      </div>
+      <div class="calc-block">
+        <div class="col-label" style="margin-bottom:12px">2. Material Tier</div>
+        <div id="tierGrid"></div>
+      </div>
+      <div class="calc-block">
+        <div class="qty-label"><span>3. Quantity (<span id="qtyUnit">sofa</span>s)</span> <b id="qtyVal">1</b></div>
+        <input type="range" min="1" max="12" value="1" id="qtySlider" oninput="onQtyChange()">
+        <div class="qty-scale"><span>1</span><span>12</span></div>
+      </div>
+    </div>
+
+    <div class="calc-right">
+      <div>
+        <span class="label">Estimated Requirement</span>
+        <div class="calc-result" id="calcResult">7.5<span>m</span></div>
+        <p class="desc" id="calcDesc"></p>
+        <hr class="stitch" style="border-top-color:rgba(245,240,230,.2)">
+        <div class="summary-row"><span>Item</span><span id="sumItem">3-Seater Sofa</span></div>
+        <div class="summary-row"><span>Material</span><span id="sumTier">Premium Light Chinese Fabric</span></div>
+        <div class="summary-row"><span>Quantity</span><span id="sumQty">1</span></div>
+        <div class="summary-row"><span>Branch</span><span id="sumBranch">Kabarnet Town Branch</span></div>
+      </div>
+      <a class="btn-gold-full press" id="calcWaBtn" href="#" target="_blank" rel="noreferrer">
+        <svg viewBox="0 0 24 24" fill="currentColor" width="16" height="16"><path d="M17.47 14.38c-.29-.14-1.71-.84-1.97-.94-.27-.1-.46-.14-.66.14-.2.29-.75.94-.92 1.13-.17.2-.34.22-.63.07-.29-.14-1.22-.45-2.32-1.43-.86-.76-1.44-1.71-1.6-2-.17-.29-.02-.44.13-.59.13-.13.29-.34.43-.5.14-.17.19-.29.29-.48.1-.2.05-.37-.02-.51-.07-.14-.66-1.59-.9-2.18-.24-.57-.48-.5-.66-.51h-.56c-.2 0-.51.07-.78.37-.27.29-1.02 1-1.02 2.44s1.05 2.83 1.19 3.02c.14.2 2.06 3.15 5 4.41.7.3 1.24.48 1.67.62.7.22 1.34.19 1.84.12.56-.08 1.71-.7 1.96-1.38.24-.68.24-1.26.17-1.38-.07-.12-.26-.2-.55-.34z"/><path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.75.46 3.45 1.32 4.95L2.05 22l5.29-1.39a9.87 9.87 0 0 0 4.7 1.2h.01c5.46 0 9.9-4.45 9.9-9.9C21.96 6.45 17.5 2 12.04 2zm0 18.1h-.01a8.2 8.2 0 0 1-4.19-1.15l-.3-.18-3.14.82.84-3.06-.2-.31a8.2 8.2 0 0 1-1.26-4.4c0-4.54 3.7-8.24 8.26-8.24 2.2 0 4.28.86 5.84 2.42a8.2 8.2 0 0 1 2.42 5.83c0 4.55-3.7 8.27-8.26 8.27z"/></svg>
+        Inquire Availability via WhatsApp
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ============ PARTNER HUB ============ -->
+<section class="partners wrap">
+  <div class="partner-grid">
+    <div>
+      <div class="eyebrow"><span class="line"></span><span>Trade &amp; Bulk Supply</span></div>
+      <h2>Built for Baringo's carpenters &amp; designers</h2>
+      <p>Beyond retail, Baraka Mini Hardware runs a dedicated trade counter for local furniture makers — bulk fabric and foam pricing, custom foam cutting to your template, and delivery logistics that reach every corner of the county.</p>
+      <a class="btn-primary press" style="display:inline-flex;align-items:center;gap:8px" href="https://wa.me/254723068125?text=Hi%2C%20I%27m%20a%20carpenter%2Fdesigner%20interested%20in%20your%20bulk%20trade%20pricing." target="_blank" rel="noreferrer">
+        <svg viewBox="0 0 24 24" fill="currentColor" width="16" height="16"><path d="M17.47 14.38c-.29-.14-1.71-.84-1.97-.94-.27-.1-.46-.14-.66.14-.2.29-.75.94-.92 1.13-.17.2-.34.22-.63.07-.29-.14-1.22-.45-2.32-1.43-.86-.76-1.44-1.71-1.6-2-.17-.29-.02-.44.13-.59.13-.13.29-.34.43-.5.14-.17.19-.29.29-.48.1-.2.05-.37-.02-.51-.07-.14-.66-1.59-.9-2.18-.24-.57-.48-.5-.66-.51h-.56c-.2 0-.51.07-.78.37-.27.29-1.02 1-1.02 2.44s1.05 2.83 1.19 3.02c.14.2 2.06 3.15 5 4.41.7.3 1.24.48 1.67.62.7.22 1.34.19 1.84.12.56-.08 1.71-.7 1.96-1.38.24-.68.24-1.26.17-1.38-.07-.12-.26-.2-.55-.34z"/><path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.75.46 3.45 1.32 4.95L2.05 22l5.29-1.39a9.87 9.87 0 0 0 4.7 1.2h.01c5.46 0 9.9-4.45 9.9-9.9C21.96 6.45 17.5 2 12.04 2zm0 18.1h-.01a8.2 8.2 0 0 1-4.19-1.15l-.3-.18-3.14.82.84-3.06-.2-.31a8.2 8.2 0 0 1-1.26-4.4c0-4.54 3.7-8.24 8.26-8.24 2.2 0 4.28.86 5.84 2.42a8.2 8.2 0 0 1 2.42 5.83c0 4.55-3.7 8.27-8.26 8.27z"/></svg>
+        Talk to the Trade Desk
+      </a>
+    </div>
+    <div class="feature-grid">
+      <div class="feature-card">
+        <div class="feature-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" width="22" height="22"><rect x="3" y="8" width="18" height="10" rx="1.5"/><path d="M3 8l4-4h10l4 4"/></svg></div>
+        <h3>Custom Foam Cutting</h3>
+        <p>Bring your template or dimensions — we cut mattress and cushion foam to precise size on site.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" width="22" height="22"><path d="M21 8l-9-5-9 5 9 5 9-5z"/><path d="M3 8v8l9 5 9-5V8"/><path d="M12 13v8"/></svg></div>
+        <h3>Bulk Fabric &amp; Hardware</h3>
+        <p>Trade pricing on fabric rolls, foam blocks, hinges and sliders for workshops and contractors.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" width="22" height="22"><rect x="1" y="6" width="14" height="10" rx="1"/><path d="M15 10h4l3 3v3h-7z"/><circle cx="5.5" cy="18.5" r="1.8"/><circle cx="17.5" cy="18.5" r="1.8"/></svg></div>
+        <h3>County-Wide Delivery</h3>
+        <p>From Kabarnet to Marigat, Eldama Ravine and beyond — logistics arranged for larger orders.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" width="22" height="22"><path d="M8 12l3 3 6-6"/><path d="M2 12l5-5 4 2 3-2 5 4-4 4-3-2-4 3-5-4z"/></svg></div>
+        <h3>Standing Partner Accounts</h3>
+        <p>Regular carpenters and designers get priority stock holds and dedicated account support.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ FOOTER ============ -->
+<footer>
+  <div class="wrap footer-top">
+    <div class="footer-grid">
+      <div>
+        <div class="foot-brand">
+          <div class="foot-mark"><span>B</span></div>
+          <span class="foot-name">Baraka Mini Hardware</span>
+        </div>
+        <p class="foot-desc">Kabarnet's home for premium mattresses, designer fabrics, elite leather and cabinetry hardware.</p>
+        <a class="foot-email" href="mailto:barakaminihardware@gmail.com" style="margin-top:14px">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" width="14" height="14"><path d="M4 4h16v16H4z" opacity="0"/><path d="M22 6l-10 7L2 6"/><rect x="2" y="4" width="20" height="16" rx="2"/></svg>
+          barakaminihardware@gmail.com
+        </a>
+      </div>
+
+      <div>
+        <div class="foot-heading">Kabarnet Town Branch</div>
+        <a class="foot-phone" href="tel:+254723068125">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" width="14" height="14"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+          0723 068 125
+        </a>
+        <div class="foot-hours">
+          <div class="foot-hours-row"><span>Mon – Fri</span><span>8:00am – 6:30pm</span></div>
+          <div class="foot-hours-row"><span>Saturday</span><span>8:00am – 7:00pm</span></div>
+          <div class="foot-hours-row"><span>Sunday</span><span>2:00pm – 6:00pm</span></div>
+        </div>
+        <a class="foot-wa" href="https://wa.me/254723068125" target="_blank" rel="noreferrer">
+          <svg viewBox="0 0 24 24" fill="currentColor" width="14" height="14"><path d="M17.47 14.38c-.29-.14-1.71-.84-1.97-.94-.27-.1-.46-.14-.66.14-.2.29-.75.94-.92 1.13-.17.2-.34.22-.63.07-.29-.14-1.22-.45-2.32-1.43-.86-.76-1.44-1.71-1.6-2-.17-.29-.02-.44.13-.59.13-.13.29-.34.43-.5.14-.17.19-.29.29-.48.1-.2.05-.37-.02-.51-.07-.14-.66-1.59-.9-2.18-.24-.57-.48-.5-.66-.51h-.56c-.2 0-.51.07-.78.37-.27.29-1.02 1-1.02 2.44s1.05 2.83 1.19 3.02c.14.2 2.06 3.15 5 4.41.7.3 1.24.48 1.67.62.7.22 1.34.19 1.84.12.56-.08 1.71-.7 1.96-1.38.24-.68.24-1.26.17-1.38-.07-.12-.26-.2-.55-.34z"/><path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.75.46 3.45 1.32 4.95L2.05 22l5.29-1.39a9.87 9.87 0 0 0 4.7 1.2h.01c5.46 0 9.9-4.45 9.9-9.9C21.96 6.45 17.5 2 12.04 2zm0 18.1h-.01a8.2 8.2 0 0 1-4.19-1.15l-.3-.18-3.14.82.84-3.06-.2-.31a8.2 8.2 0 0 1-1.26-4.4c0-4.54 3.7-8.24 8.26-8.24 2.2 0 4.28.86 5.84 2.42a8.2 8.2 0 0 1 2.42 5.83c0 4.55-3.7 8.27-8.26 8.27z"/></svg>
+          WhatsApp this branch
+        </a>
+      </div>
+
+      <div>
+        <div class="foot-heading">Kabarnet Market Branch</div>
+        <a class="foot-phone" href="tel:+254723068125">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" width="14" height="14"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+          0723 068 125
+        </a>
+        <div class="foot-hours">
+          <div class="foot-hours-row"><span>Mon – Fri</span><span>7:30am – 6:00pm</span></div>
+          <div class="foot-hours-row"><span>Saturday</span><span>7:30am – 7:00pm</span></div>
+          <div class="foot-hours-row"><span>Sunday</span><span>Closed</span></div>
+        </div>
+        <a class="foot-wa" href="https://wa.me/254723068125" target="_blank" rel="noreferrer">
+          <svg viewBox="0 0 24 24" fill="currentColor" width="14" height="14"><path d="M17.47 14.38c-.29-.14-1.71-.84-1.97-.94-.27-.1-.46-.14-.66.14-.2.29-.75.94-.92 1.13-.17.2-.34.22-.63.07-.29-.14-1.22-.45-2.32-1.43-.86-.76-1.44-1.71-1.6-2-.17-.29-.02-.44.13-.59.13-.13.29-.34.43-.5.14-.17.19-.29.29-.48.1-.2.05-.37-.02-.51-.07-.14-.66-1.59-.9-2.18-.24-.57-.48-.5-.66-.51h-.56c-.2 0-.51.07-.78.37-.27.29-1.02 1-1.02 2.44s1.05 2.83 1.19 3.02c.14.2 2.06 3.15 5 4.41.7.3 1.24.48 1.67.62.7.22 1.34.19 1.84.12.56-.08 1.71-.7 1.96-1.38.24-.68.24-1.26.17-1.38-.07-.12-.26-.2-.55-.34z"/><path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.75.46 3.45 1.32 4.95L2.05 22l5.29-1.39a9.87 9.87 0 0 0 4.7 1.2h.01c5.46 0 9.9-4.45 9.9-9.9C21.96 6.45 17.5 2 12.04 2zm0 18.1h-.01a8.2 8.2 0 0 1-4.19-1.15l-.3-.18-3.14.82.84-3.06-.2-.31a8.2 8.2 0 0 1-1.26-4.4c0-4.54 3.7-8.24 8.26-8.24 2.2 0 4.28.86 5.84 2.42a8.2 8.2 0 0 1 2.42 5.83c0 4.55-3.7 8.27-8.26 8.27z"/></svg>
+          WhatsApp this branch
+        </a>
+      </div>
+
+      <div>
+        <div class="foot-heading">Connect</div>
+        <div class="social-row">
+          <a class="social-icon" href="#" aria-label="Facebook"><svg viewBox="0 0 24 24" fill="currentColor" width="16" height="16"><path d="M13.5 21v-8h2.7l.4-3.1h-3.1V8c0-.9.25-1.5 1.55-1.5H17V3.7c-.27-.04-1.2-.12-2.28-.12-2.26 0-3.8 1.38-3.8 3.9V10H8.3v3.1h2.62V21h2.58z"/></svg></a>
+          <a class="social-icon" href="#" aria-label="Instagram"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" width="16" height="16"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.2" cy="6.8" r="1" fill="currentColor" stroke="none"/></svg></a>
+          <a class="social-icon" href="https://wa.me/254723068125" target="_blank" rel="noreferrer" aria-label="WhatsApp"><svg viewBox="0 0 24 24" fill="currentColor" width="16" height="16"><path d="M17.47 14.38c-.29-.14-1.71-.84-1.97-.94-.27-.1-.46-.14-.66.14-.2.29-.75.94-.92 1.13-.17.2-.34.22-.63.07-.29-.14-1.22-.45-2.32-1.43-.86-.76-1.44-1.71-1.6-2-.17-.29-.02-.44.13-.59.13-.13.29-.34.43-.5.14-.17.19-.29.29-.48.1-.2.05-.37-.02-.51-.07-.14-.66-1.59-.9-2.18-.24-.57-.48-.5-.66-.51h-.56c-.2 0-.51.07-.78.37-.27.29-1.02 1-1.02 2.44s1.05 2.83 1.19 3.02c.14.2 2.06 3.15 5 4.41.7.3 1.24.48 1.67.62.7.22 1.34.19 1.84.12.56-.08 1.71-.7 1.96-1.38.24-.68.24-1.26.17-1.38-.07-.12-.26-.2-.55-.34z"/><path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.75.46 3.45 1.32 4.95L2.05 22l5.29-1.39a9.87 9.87 0 0 0 4.7 1.2h.01c5.46 0 9.9-4.45 9.9-9.9C21.96 6.45 17.5 2 12.04 2zm0 18.1h-.01a8.2 8.2 0 0 1-4.19-1.15l-.3-.18-3.14.82.84-3.06-.2-.31a8.2 8.2 0 0 1-1.26-4.4c0-4.54 3.7-8.24 8.26-8.24 2.2 0 4.28.86 5.84 2.42a8.2 8.2 0 0 1 2.42 5.83c0 4.55-3.7 8.27-8.26 8.27z"/></svg></a>
+        </div>
+        <p style="font-size:12px;color:rgba(245,240,230,.5);margin:20px 0 0;line-height:1.6">Kabarnet, Baringo County, Kenya</p>
+      </div>
+    </div>
+
+    <div class="footer-bottom">
+      <span id="yearSpan">© 2026 Baraka Mini Hardware. All rights reserved.</span>
+      <span>Two branches in Kabarnet — one standard of craft.</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+/* ================= DATA ================= */
+const PHONE_DISPLAY = "0723 068 125";
+const PHONE_TEL = "+254723068125";
+const WA_NUMBER = "254723068125";
+const EMAIL = "barakaminihardware@gmail.com";
+
+const BRANCHES = {
+  town: {
+    name: "Kabarnet Town Branch",
+    tag: "Flagship Showroom",
+    address: "Kabarnet–Eldama Ravine Road, opposite the main bus stage, Kabarnet",
+    phoneDisplay: PHONE_DISPLAY,
+    phoneTel: PHONE_TEL,
+    whatsapp: WA_NUMBER,
+    hours: [["Mon – Fri","8:00am – 6:30pm"],["Saturday","8:00am – 7:00pm"],["Sunday","2:00pm – 6:00pm"]],
+    focus: "Our largest floor — full mattress gallery, the complete fabric swatch library, and made-to-order upholstery consultations.",
+    stock: ["Full mattress showroom","200+ fabric swatches on site","Leather & vinyl rolls","In-house tailoring desk"]
+  },
+  market: {
+    name: "Kabarnet Market Branch",
+    tag: "Hardware & Supply Depot",
+    address: "Kabarnet Open-Air Market Road, next to Baringo Farmers Sacco, Kabarnet",
+    phoneDisplay: PHONE_DISPLAY,
+    phoneTel: PHONE_TEL,
+    whatsapp: WA_NUMBER,
+    hours: [["Mon – Fri","7:30am – 6:00pm"],["Saturday","7:30am – 7:00pm"],["Sunday","Closed"]],
+    focus: "Our trade counter — bulk fabric rolls, foam blocks, and the full cabinetry & joinery hardware catalog for carpenters and contractors.",
+    stock: ["Bulk foam & fabric rolls","Hinges, sliders & handles","Trade pricing counter","Same-day carpenter pickup"]
+  }
+};
+
+const CATEGORIES = [
+  { id:"mattress", label:"Mattresses & Cushions", short:"Mattresses" },
+  { id:"fabric", label:"Premium Fabrics", short:"Fabrics" },
+  { id:"leather", label:"Elite Furniture Leather", short:"Leather" },
+  { id:"hardware", label:"Cabinetry & Joinery Hardware", short:"Hardware" }
+];
+
+const PRODUCTS = [
+  { id:1, cat:"mattress", name:"Orthopedic Support King", detail:"High-density reinforced foam core, 8-inch profile, firm orthopedic support.", swatch:"linear-gradient(135deg,#EDE3D0,#D9C8A8)", meta:"6 x 6 ft · Firm" },
+  { id:2, cat:"mattress", name:"Cloud Density Queen", detail:"Layered high-density foam with a plush quilted cover, medium-soft feel.", swatch:"linear-gradient(135deg,#F2ECDD,#E2D2B4)", meta:"5 x 6.25 ft · Medium" },
+  { id:3, cat:"mattress", name:"Custom-Cut Cushion Set", detail:"Any shape, any density — cut to your seat frame and covered on request.", swatch:"linear-gradient(135deg,#E7DCC6,#C9A15D)", meta:"Made to size" },
+  { id:4, cat:"mattress", name:"Firm Traveller Single", detail:"Compact high-density foam, ideal for guest rooms and boarding students.", swatch:"linear-gradient(135deg,#EFE6D4,#D4C19B)", meta:"3 x 6 ft · Firm" },
+  { id:5, cat:"fabric", name:"Heavy Chinese Textile", detail:"Dense woven upholstery cloth built for daily-use sofas and dining chairs.", swatch:"linear-gradient(135deg,#3B2A20,#5C4531)", meta:"150cm width · Heavy" },
+  { id:6, cat:"fabric", name:"Light Chinese Fabric", detail:"Softer weave for cushions, headboards and low-traffic accent pieces.", swatch:"linear-gradient(135deg,#8C6A4E,#B8916A)", meta:"150cm width · Light" },
+  { id:7, cat:"fabric", name:"Crushed Velvet", detail:"Deep-pile velvet with a soft light-catching finish for statement furniture.", swatch:"linear-gradient(135deg,#1F4A44,#2F6A61)", meta:"140cm width · Luxury" },
+  { id:8, cat:"fabric", name:"Waxed Canvas Drapery", detail:"Structured canvas for curtains, outdoor cushions and durable drapery.", swatch:"linear-gradient(135deg,#C9A15D,#8C6A4E)", meta:"160cm width · Heavy" },
+  { id:9, cat:"leather", name:"Genuine Top-Grain Leather", detail:"Full-grain hide with natural texture, for sofas and executive seating.", swatch:"linear-gradient(135deg,#4A2E1E,#6B4530)", meta:"Per hide · Premium" },
+  { id:10, cat:"leather", name:"Heavy-Duty Faux Leather", detail:"Commercial-grade synthetic built to resist cracking and daily wear.", swatch:"linear-gradient(135deg,#2B211B,#463228)", meta:"137cm width · Durable" },
+  { id:11, cat:"leather", name:"Vinyl Texture Roll", detail:"Wipeable vinyl finish suited to dining seating and commercial spaces.", swatch:"linear-gradient(135deg,#5C4531,#7A5A3D)", meta:"137cm width · Wipeable" },
+  { id:12, cat:"leather", name:"Pebble-Grain Synthetic", detail:"Textured grain finish that mimics leather at a fraction of the cost.", swatch:"linear-gradient(135deg,#8C6A4E,#3B2A20)", meta:"137cm width · Value" },
+  { id:13, cat:"hardware", name:"Brushed Copper Handles", detail:"Solid-cast cabinet pulls with a warm brushed-copper finish.", swatch:"linear-gradient(135deg,#B87A4A,#C9A15D)", meta:"Sold per piece" },
+  { id:14, cat:"hardware", name:"Heavy-Duty Soft-Close Hinges", detail:"Rated for daily commercial use with a controlled soft-close action.", swatch:"linear-gradient(135deg,#221D1A,#3B2A20)", meta:"Sold per pair" },
+  { id:15, cat:"hardware", name:"Drawer Slider Rails", detail:"Full-extension steel rails rated for heavy drawer loads.", swatch:"linear-gradient(135deg,#4A4038,#221D1A)", meta:"18in / 24in" },
+  { id:16, cat:"hardware", name:"Luxury Wardrobe Handles", detail:"Statement handles in matte gold for wardrobes and feature cabinetry.", swatch:"linear-gradient(135deg,#C9A15D,#8C6A4E)", meta:"Sold per piece" }
+];
+
+const ITEM_TYPES = [
+  { id:"sofa1", label:"1-Seater Sofa Chair", base:3.0, unit:"seat" },
+  { id:"sofa3", label:"3-Seater Sofa", base:7.5, unit:"sofa" },
+  { id:"diningchair", label:"Dining Chair (seat + back)", base:1.5, unit:"chair" },
+  { id:"headboard", label:"King Headboard", base:3.2, unit:"headboard" },
+  { id:"mattress-king", label:"King Mattress Cover", base:6.0, unit:"mattress" },
+  { id:"cushion", label:"Custom Cushion (per piece)", base:0.9, unit:"cushion" }
+];
+
+const MATERIAL_TIERS = [
+  { id:"light-chinese", label:"Premium Light Chinese Fabric", factor:1.0, note:"Best for cushions & light-use seating" },
+  { id:"heavy-chinese", label:"Heavy Chinese Textile", factor:1.08, note:"Best for daily-use sofas & dining chairs" },
+  { id:"velvet", label:"Crushed Velvet", factor:1.12, note:"Statement pieces, low-traffic furniture" },
+  { id:"leather", label:"Genuine / Faux Leather", factor:0.92, note:"Sold by hide or wider roll width" }
+];
+
+/* ================= STATE ================= */
+let state = {
+  branch: "town",
+  cat: "mattress",
+  itemId: "sofa3",
+  tierId: "light-chinese",
+  qty: 1
+};
+
+const waIcon = `<svg viewBox="0 0 24 24" fill="currentColor" width="14" height="14"><path d="M17.47 14.38c-.29-.14-1.71-.84-1.97-.94-.27-.1-.46-.14-.66.14-.2.29-.75.94-.92 1.13-.17.2-.34.22-.63.07-.29-.14-1.22-.45-2.32-1.43-.86-.76-1.44-1.71-1.6-2-.17-.29-.02-.44.13-.59.13-.13.29-.34.43-.5.14-.17.19-.29.29-.48.1-.2.05-.37-.02-.51-.07-.14-.66-1.59-.9-2.18-.24-.57-.48-.5-.66-.51h-.56c-.2 0-.51.07-.78.37-.27.29-1.02 1-1.02 2.44s1.05 2.83 1.19 3.02c.14.2 2.06 3.15 5 4.41.7.3 1.24.48 1.67.62.7.22 1.34.19 1.84.12.56-.08 1.71-.7 1.96-1.38.24-.68.24-1.26.17-1.38-.07-.12-.26-.2-.55-.34z"/><path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.75.46 3.45 1.32 4.95L2.05 22l5.29-1.39a9.87 9.87 0 0 0 4.7 1.2h.01c5.46 0 9.9-4.45 9.9-9.9C21.96 6.45 17.5 2 12.04 2zm0 18.1h-.01a8.2 8.2 0 0 1-4.19-1.15l-.3-.18-3.14.82.84-3.06-.2-.31a8.2 8.2 0 0 1-1.26-4.4c0-4.54 3.7-8.24 8.26-8.24 2.2 0 4.28.86 5.84 2.42a8.2 8.2 0 0 1 2.42 5.83c0 4.55-3.7 8.27-8.26 8.27z"/></svg>`;
+
+/* ================= RENDER FUNCTIONS ================= */
+function renderBranch(){
+  const b = BRANCHES[state.branch];
+  document.getElementById('tabTown').classList.toggle('active', state.branch === 'town');
+  document.getElementById('tabMarket').classList.toggle('active', state.branch === 'market');
+
+  const stockHtml = b.stock.map(s => `<li>${s}</li>`).join('');
+  const hoursHtml = b.hours.map(([d,h]) => `<div class="hours-row"><span>${d}</span><span>${h}</span></div>`).join('');
+
+  document.getElementById('branchCard').innerHTML = `
+    <div class="branch-left">
+      <div class="glow"></div>
+      <span class="branch-tag">${b.tag}</span>
+      <h3>${b.name}</h3>
+      <p class="focus">${b.focus}</p>
+      <div class="branch-row">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" width="16" height="16"><path d="M12 21s-7-6.1-7-11.5A7 7 0 0 1 12 2.5a7 7 0 0 1 7 7C19 14.9 12 21 12 21z"/><circle cx="12" cy="9.5" r="2.3"/></svg>
+        <span>${b.address}</span>
+      </div>
+      <div class="branch-row">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" width="16" height="16"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+        <a href="tel:${b.phoneTel}">${b.phoneDisplay}</a>
+      </div>
+      <a class="btn-gold press" href="https://wa.me/${b.whatsapp}" target="_blank" rel="noreferrer">${waIcon} Chat with this branch</a>
+    </div>
+    <div class="branch-right">
+      <div class="col-label">Operating Hours</div>
+      <div style="margin-bottom:28px">${hoursHtml}</div>
+      <div class="col-label">What's on this floor</div>
+      <ul class="stock-list">${stockHtml}</ul>
+    </div>
+  `;
+
+  // sync calculator branch summary + WA links
+  document.getElementById('sumBranch').textContent = b.name;
+  updateCalc();
+  updateCatalogWa();
+}
+
+function renderCatTabs(){
+  const wrap = document.getElementById('catTabs');
+  wrap.innerHTML = CATEGORIES.map(c =>
+    `<button class="cat-tab press ${c.id === state.cat ? 'active' : ''}" onclick="setCat('${c.id}')">${c.label}</button>`
+  ).join('');
+}
+
+function renderProducts(){
+  const grid = document.getElementById('productGrid');
+  const items = PRODUCTS.filter(p => p.cat === state.cat);
+  grid.innerHTML = items.map(p => `
+    <div class="product-card">
+      <div class="product-img">
+        <div class="product-fill" style="background:${p.swatch}"></div>
+        <div class="product-meta">${p.meta}</div>
+      </div>
+      <div class="product-body">
+        <h3>${p.name}</h3>
+        <p>${p.detail}</p>
+      </div>
+    </div>
+  `).join('');
+  updateCatalogWa();
+}
+
+function updateCatalogWa(){
+  const cat = CATEGORIES.find(c => c.id === state.cat);
+  const b = BRANCHES[state.branch];
+  document.getElementById('catalogWaLabel').textContent = `Ask about ${cat.short}`;
+  const msg = encodeURIComponent(`Hi Baraka Mini Hardware, I'd like to ask about your ${cat.label} range.`);
+  document.getElementById('catalogWaBtn').href = `https://wa.me/${b.whatsapp}?text=${msg}`;
+}
+
+function renderItemGrid(){
+  const wrap = document.getElementById('itemGrid');
+  wrap.innerHTML = ITEM_TYPES.map(i =>
+    `<button class="opt-btn press ${i.id === state.itemId ? 'active' : ''}" onclick="setItem('${i.id}')">${i.label}</button>`
+  ).join('');
+}
+
+function renderTierGrid(){
+  const wrap = document.getElementById('tierGrid');
+  wrap.innerHTML = MATERIAL_TIERS.map(t => `
+    <button class="tier-btn press ${t.id === state.tierId ? 'active' : ''}" onclick="setTier('${t.id}')">
+      <span class="t-label">${t.label}</span>
+      <span class="t-note">${t.note}</span>
+    </button>
+  `).join('');
+}
+
+function updateCalc(){
+  const item = ITEM_TYPES.find(i => i.id === state.itemId);
+  const tier = MATERIAL_TIERS.find(t => t.id === state.tierId);
+  const b = BRANCHES[state.branch];
+  const meters = Math.round(item.base * tier.factor * state.qty * 10) / 10;
+
+  document.getElementById('qtyUnit').textContent = item.unit;
+  document.getElementById('qtyVal').textContent = state.qty;
+  document.getElementById('calcResult').innerHTML = `${meters}<span>m</span>`;
+  document.getElementById('calcDesc').innerHTML = `Approximate meters of <b>${tier.label}</b> for ${state.qty} × ${item.label.toLowerCase()}. Final yardage confirmed in-store against your actual frame or dimensions.`;
+  document.getElementById('sumItem').textContent = item.label;
+  document.getElementById('sumTier').textContent = tier.label;
+  document.getElementById('sumQty').textContent = state.qty;
+  document.getElementById('sumBranch').textContent = b.name;
+
+  const waMsg = encodeURIComponent(
+    `Hi Baraka Mini Hardware, I'd like to check availability:\nItem: ${item.label} x${state.qty}\nMaterial: ${tier.label}\nEstimated need: ${meters} meters\nCould you confirm pricing and stock?`
+  );
+  document.getElementById('calcWaBtn').href = `https://wa.me/${b.whatsapp}?text=${waMsg}`;
+}
+
+/* ================= EVENT HANDLERS ================= */
+function setBranch(id){ state.branch = id; renderBranch(); }
+function setCat(id){ state.cat = id; renderCatTabs(); renderProducts(); }
+function setItem(id){ state.itemId = id; renderItemGrid(); updateCalc(); }
+function setTier(id){ state.tierId = id; renderTierGrid(); updateCalc(); }
+function onQtyChange(){ state.qty = Number(document.getElementById('qtySlider').value); updateCalc(); }
+function scrollToId(id){ document.getElementById(id).scrollIntoView({ behavior:'smooth', block:'start' }); }
+function toggleMenu(){ document.getElementById('mobileMenu').classList.toggle('open'); }
+
+/* ================= HERO WORD SWAP ================= */
+function initWordSwap(){
+  const wrap = document.getElementById('wordSwapWrap');
+  const words = Array.from(wrap.querySelectorAll('.word-swap'));
+  if (words.length < 2) return;
+  let current = 0;
+  const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if (reduceMotion) return; // leave first word statically visible
+
+  // start every non-active word in the "entering" (below, invisible) position
+  words.forEach((w, i) => { if (i !== current) w.classList.add('is-entering'); });
+
+  setInterval(() => {
+    const next = (current + 1) % words.length;
+    const outgoing = words[current];
+    const incoming = words[next];
+
+    outgoing.classList.remove('is-active');
+    outgoing.classList.add('is-leaving');
+
+    incoming.classList.remove('is-entering');
+    incoming.classList.add('is-active');
+
+    setTimeout(() => {
+      outgoing.classList.remove('is-leaving');
+      outgoing.classList.add('is-entering');
+    }, 520);
+
+    current = next;
+  }, 2400);
+}
+
+/* ================= INIT ================= */
+renderBranch();
+renderCatTabs();
+renderProducts();
+renderItemGrid();
+renderTierGrid();
+updateCalc();
+initWordSwap();
+document.getElementById('yearSpan').textContent = `© ${new Date().getFullYear()} Baraka Mini Hardware. All rights reserved.`;
+</script>
+
+</body>
+</html>
