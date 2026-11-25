@@ -5,6 +5,43 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>Baraka Mini Hardware — Kabarnet, Baringo</title>
 <meta name="description" content="Premium mattresses, designer fabrics, elite leather and cabinetry hardware in Kabarnet, Baringo County." />
+<meta name="theme-color" content="#3B2A20" />
+<link rel="canonical" href="https://barakamini-main-website.vercel.app/" />
+<meta property="og:type" content="website" />
+<meta property="og:site_name" content="Baraka Mini Hardware" />
+<meta property="og:title" content="Baraka Mini Hardware — Kabarnet, Baringo" />
+<meta property="og:description" content="Mattresses, upholstery fabrics, leather and cabinetry hardware. Two branches in Kabarnet. Chat with us on WhatsApp." />
+<meta property="og:url" content="https://barakamini-main-website.vercel.app/" />
+<meta name="twitter:card" content="summary" />
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%233B2A20'/%3E%3Ctext x='32' y='44' font-family='Georgia,serif' font-size='36' text-anchor='middle' fill='%23C9A15D'%3EB%3C/text%3E%3C/svg%3E" />
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "HardwareStore",
+  "name": "Baraka Mini Hardware",
+  "description": "Mattresses, upholstery fabrics, leather and cabinetry hardware in Kabarnet, Baringo County.",
+  "url": "https://barakamini-main-website.vercel.app/",
+  "telephone": "+254723068125",
+  "email": "barakaminihardware@gmail.com",
+  "address": { "@type": "PostalAddress", "addressLocality": "Kabarnet", "addressRegion": "Baringo County", "addressCountry": "KE" },
+  "department": [
+    {
+      "@type": "HardwareStore",
+      "name": "Baraka Mini Hardware — Kabarnet Town Branch",
+      "telephone": "+254723068125",
+      "address": { "@type": "PostalAddress", "streetAddress": "Kabarnet–Eldama Ravine Road, opposite the main bus stage", "addressLocality": "Kabarnet", "addressRegion": "Baringo County", "addressCountry": "KE" },
+      "openingHours": ["Mo-Fr 08:00-18:30", "Sa 08:00-19:00", "Su 14:00-18:00"]
+    },
+    {
+      "@type": "HardwareStore",
+      "name": "Baraka Mini Hardware — Kabarnet Market Branch",
+      "telephone": "+254723068125",
+      "address": { "@type": "PostalAddress", "streetAddress": "Kabarnet Open-Air Market Road, next to Baringo Farmers Sacco", "addressLocality": "Kabarnet", "addressRegion": "Baringo County", "addressCountry": "KE" },
+      "openingHours": ["Mo-Fr 07:30-18:00", "Sa 07:30-19:00"]
+    }
+  ]
+}
+</script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,450;0,9..144,600;0,9..144,700;1,9..144,500&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 <style>
@@ -147,6 +184,10 @@
   .cat-tab:hover{border-color:rgba(34,29,26,.5);}
   .cat-tab.active{background:var(--charcoal);color:var(--alabaster);border-color:var(--charcoal);}
   .product-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:24px;}
+  .catalog-status{grid-column:1/-1;padding:36px 24px;text-align:center;border:1px dashed rgba(140,106,78,.35);border-radius:12px;color:rgba(59,42,32,.75);font-size:14px;line-height:1.7;}
+  .catalog-status b{display:block;font-family:'Fraunces',serif;font-size:18px;font-weight:450;color:var(--espresso);margin-bottom:4px;}
+  .catalog-status a{color:#8C6A4E;font-weight:600;text-decoration:underline;}
+  .branch-row a.map-link{text-decoration:underline;}
   .product-card{border-radius:4px;overflow:hidden;background:var(--alabaster);border:1px solid rgba(34,29,26,.1);transition:transform .45s cubic-bezier(.2,.8,.2,1), box-shadow .45s ease;animation:fadeUp .5s cubic-bezier(.2,.7,.2,1) both;}
   .product-card:hover{transform:translateY(-8px);box-shadow:0 24px 48px -18px rgba(34,29,26,.35);}
   .product-img{height:160px;position:relative;overflow:hidden;}
@@ -541,7 +582,8 @@ const CATEGORIES = [
   { id:"mattress", label:"Mattresses & Cushions", short:"Mattresses" },
   { id:"fabric", label:"Premium Fabrics", short:"Fabrics" },
   { id:"leather", label:"Elite Furniture Leather", short:"Leather" },
-  { id:"hardware", label:"Cabinetry & Joinery Hardware", short:"Hardware" }
+  { id:"hardware", label:"Cabinetry & Joinery Hardware", short:"Hardware" },
+  { id:"other", label:"Other Products", short:"Other Products", hideWhenEmpty:true }
 ];
 
 let PRODUCTS = []; // populated live from Supabase on page load
@@ -574,6 +616,21 @@ let state = {
 
 const waIcon = `<svg viewBox="0 0 24 24" fill="currentColor" width="14" height="14"><path d="M17.47 14.38c-.29-.14-1.71-.84-1.97-.94-.27-.1-.46-.14-.66.14-.2.29-.75.94-.92 1.13-.17.2-.34.22-.63.07-.29-.14-1.22-.45-2.32-1.43-.86-.76-1.44-1.71-1.6-2-.17-.29-.02-.44.13-.59.13-.13.29-.34.43-.5.14-.17.19-.29.29-.48.1-.2.05-.37-.02-.51-.07-.14-.66-1.59-.9-2.18-.24-.57-.48-.5-.66-.51h-.56c-.2 0-.51.07-.78.37-.27.29-1.02 1-1.02 2.44s1.05 2.83 1.19 3.02c.14.2 2.06 3.15 5 4.41.7.3 1.24.48 1.67.62.7.22 1.34.19 1.84.12.56-.08 1.71-.7 1.96-1.38.24-.68.24-1.26.17-1.38-.07-.12-.26-.2-.55-.34z"/><path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.75.46 3.45 1.32 4.95L2.05 22l5.29-1.39a9.87 9.87 0 0 0 4.7 1.2h.01c5.46 0 9.9-4.45 9.9-9.9C21.96 6.45 17.5 2 12.04 2zm0 18.1h-.01a8.2 8.2 0 0 1-4.19-1.15l-.3-.18-3.14.82.84-3.06-.2-.31a8.2 8.2 0 0 1-1.26-4.4c0-4.54 3.7-8.24 8.26-8.24 2.2 0 4.28.86 5.84 2.42a8.2 8.2 0 0 1 2.42 5.83c0 4.55-3.7 8.27-8.26 8.27z"/></svg>`;
 
+/* ================= SAFETY HELPERS ================= */
+// Product text comes from the database, so it is escaped before going into HTML.
+function esc(value){
+  return String(value ?? '').replace(/[&<>"']/g, c => (
+    { '&':'&amp;', '<':'&lt;', '>':'&gt;', '"':'&quot;', "'":'&#39;' }[c]
+  ));
+}
+// Only plain https image links are used; anything else falls back to a colour swatch.
+function safeImageUrl(url){
+  return /^https:\/\/[^\s'"()\\]+$/.test(url || '') ? url : '';
+}
+function mapsLink(address){
+  return 'https://www.google.com/maps/search/?api=1&query=' + encodeURIComponent(address + ', Baringo County, Kenya');
+}
+
 /* ================= RENDER FUNCTIONS ================= */
 function renderBranch(){
   const b = BRANCHES[state.branch];
@@ -591,7 +648,7 @@ function renderBranch(){
       <p class="focus">${b.focus}</p>
       <div class="branch-row">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" width="16" height="16"><path d="M12 21s-7-6.1-7-11.5A7 7 0 0 1 12 2.5a7 7 0 0 1 7 7C19 14.9 12 21 12 21z"/><circle cx="12" cy="9.5" r="2.3"/></svg>
-        <span>${b.address}</span>
+        <span>${b.address}<br><a class="map-link" href="${mapsLink(b.address)}" target="_blank" rel="noreferrer">Get directions</a></span>
       </div>
       <div class="branch-row">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" width="16" height="16"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
@@ -615,24 +672,48 @@ function renderBranch(){
 
 function renderCatTabs(){
   const wrap = document.getElementById('catTabs');
-  wrap.innerHTML = CATEGORIES.map(c =>
+  const visible = CATEGORIES.filter(c => !c.hideWhenEmpty || PRODUCTS.some(p => p.cat === c.id));
+  wrap.innerHTML = visible.map(c =>
     `<button class="cat-tab press ${c.id === state.cat ? 'active' : ''}" onclick="setCat('${c.id}')">${c.label}</button>`
   ).join('');
 }
 
+let catalogStatus = 'loading'; // 'loading' | 'ready' | 'error'
+
+function catalogMessage(title, body){
+  const b = BRANCHES[state.branch];
+  const cat = CATEGORIES.find(c => c.id === state.cat);
+  const msg = encodeURIComponent(`Hi Baraka Mini Hardware, what ${cat.label} do you have in stock?`);
+  return `<div class="catalog-status" role="status"><b>${title}</b>${body}
+    <br><a href="https://wa.me/${b.whatsapp}?text=${msg}" target="_blank" rel="noreferrer">Ask us on WhatsApp</a> or call <a href="tel:${b.phoneTel}">${b.phoneDisplay}</a>.</div>`;
+}
+
 function renderProducts(){
   const grid = document.getElementById('productGrid');
+  if (catalogStatus === 'loading') {
+    grid.innerHTML = catalogMessage('Loading products…', 'Fetching what is in stock right now.');
+    return updateCatalogWa();
+  }
+  if (catalogStatus === 'error') {
+    grid.innerHTML = catalogMessage('We could not load the product list.', 'Check your connection, or reach us directly — we reply fast.');
+    return updateCatalogWa();
+  }
   const items = PRODUCTS.filter(p => p.cat === state.cat);
+  if (!items.length) {
+    grid.innerHTML = catalogMessage('Nothing listed here yet.', 'We may still have it in the shop.');
+    return updateCatalogWa();
+  }
+  const wa = BRANCHES[state.branch].whatsapp;
   grid.innerHTML = items.map(p => `
     <div class="product-card">
       <div class="product-img">
         <div class="product-fill" style="background:${p.swatch}"></div>
-        <div class="product-meta">${p.meta}</div>
+        <div class="product-meta">${esc(p.meta)}</div>
       </div>
       <div class="product-body">
-        <h3>${p.name}</h3>
-        <p>${p.detail}</p>
-        <a class="btn-wa press" style="margin-top:10px; font-size:13px; padding:8px 14px;" target="_blank" rel="noreferrer" href="https://wa.me/${BRANCHES[state.branch].whatsapp}?text=${encodeURIComponent('Hi Baraka Mini Hardware, is the ' + p.name + ' available? I would like a quote.')}">Ask about this item</a>
+        <h3>${esc(p.name)}</h3>
+        <p>${esc(p.detail)}</p>
+        <a class="btn-wa press" style="margin-top:10px; font-size:13px; padding:8px 14px;" target="_blank" rel="noreferrer" href="https://wa.me/${wa}?text=${encodeURIComponent('Hi Baraka Mini Hardware, is the ' + p.name + ' available? I would like a quote.')}">Ask about this item</a>
       </div>
     </div>
   `).join('');
@@ -735,7 +816,8 @@ const CATEGORY_NAME_TO_ID = {
   "Mattresses & Cushions": "mattress",
   "Premium Fabrics": "fabric",
   "Elite Furniture Leather": "leather",
-  "Cabinetry & Joinery Hardware": "hardware"
+  "Cabinetry & Joinery Hardware": "hardware",
+  "Other": "other"
 };
 
 // A small set of neutral gradients to cycle through for products with no image_url
@@ -749,8 +831,9 @@ const FALLBACK_SWATCHES = [
 async function fetchLiveProducts(){
   try{
     const res = await fetch(
-      `${SUPABASE_URL}/rest/v1/products?select=id,name,category,price,image_url,description,size`,
+      `${SUPABASE_URL}/rest/v1/products?select=id,name,category,price,image_url,description,size&order=name`,
       {
+        signal: AbortSignal.timeout ? AbortSignal.timeout(10000) : undefined,
         headers: {
           "apikey": SUPABASE_ANON_KEY,
           "Authorization": `Bearer ${SUPABASE_ANON_KEY}`
@@ -769,27 +852,37 @@ async function fetchLiveProducts(){
           cat: catId,
           name: row.name,
           detail: row.description || "",
-          swatch: row.image_url ? `url('${row.image_url}') center/cover` : FALLBACK_SWATCHES[i % FALLBACK_SWATCHES.length],
-          meta: [row.size, row.price ? `KES ${Number(row.price).toLocaleString()}` : ""].filter(Boolean).join(" · ")
+          // Photo on top of a colour swatch, so a broken photo link still looks tidy
+          swatch: safeImageUrl(row.image_url)
+            ? `url('${safeImageUrl(row.image_url)}') center/cover, ${FALLBACK_SWATCHES[i % FALLBACK_SWATCHES.length]}`
+            : FALLBACK_SWATCHES[i % FALLBACK_SWATCHES.length],
+          meta: [row.size, Number(row.price) > 0 ? `KES ${Number(row.price).toLocaleString()}` : "Ask for price"].filter(Boolean).join(" · ")
         };
       })
       .filter(Boolean);
   }catch(err){
-    console.error("Could not load live products, falling back to empty catalog:", err);
+    console.error("Could not load live products:", err);
     PRODUCTS = [];
+    return false;
   }
+  return true;
 }
 
 /* ================= INIT ================= */
 async function init(){
-  await fetchLiveProducts();
+  // Everything except the product list draws immediately, even on a slow connection.
   renderBranch();
   renderCatTabs();
-  renderProducts();
+  renderProducts();          // shows "Loading products…"
   renderItemGrid();
   renderTierGrid();
   updateCalc();
   initWordSwap();
+
+  const ok = await fetchLiveProducts();
+  catalogStatus = ok ? 'ready' : 'error';
+  renderCatTabs();
+  renderProducts();
 }
 init();
 document.getElementById('yearSpan').textContent = `© ${new Date().getFullYear()} Baraka Mini Hardware. All rights reserved.`;
