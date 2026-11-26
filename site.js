@@ -1,4 +1,4 @@
-/* Baraka Mini Hardware — website extras.
+/* Baraka West Mini Hardware — website extras.
    Kiswahili, deal of the week, photos of our work, reviews, shopping-list paste,
    measuring-visit booking, order tracking and offline use. Loaded after the main script. */
 
@@ -9,7 +9,7 @@ window.SW_DICT = {
   "Kabarnet's Interior & Upholstery House": 'Duka la mapambo na ufundi wa viti, Kabarnet',
   'Transforming Baringo interiors,': 'Tunapamba nyumba za Baringo,', 'one': 'kwa',
   'Mattresses.': 'Magodoro.', 'Fabrics.': 'Vitambaa.', 'Foam.': 'Foam.', 'Hardware.': 'Vifaa.',
-  'hero-lead': 'Magodoro, vitambaa vya viti, foam sheets, mito, vifaa vya sofa na vifaa vya ujenzi — Baraka Mini Hardware inawahudumia wenye nyumba, mafundi cherehani na maseremala kote Baringo kwa bidhaa imara.',
+  'hero-lead': 'Magodoro, vitambaa vya viti, foam sheets, mito, vifaa vya sofa na vifaa vya ujenzi — Baraka West Mini Hardware inawahudumia wenye nyumba, mafundi cherehani na maseremala kote Baringo kwa bidhaa imara.',
   "See today's prices": 'Angalia bei za leo', 'Get a sofa quote': 'Pata bei ya sofa', 'Find Our Branches': 'Tafuta matawi yetu',
   'Mattresses, foam and fabric rolls — come see and touch before you buy.': 'Magodoro, foam na vitambaa — njoo uone na uguse kabla ya kununua.',
   'How to find us': 'Jinsi ya kutufikia',
@@ -138,7 +138,7 @@ function renderSiteInfo(){
     if (!safeImageUrl(g.url)) return;
     const fig = document.createElement('figure');
     fig.className = 'work-item'; fig.dataset.g = '1';
-    fig.innerHTML = `<img src="${esc(g.url)}" loading="lazy" alt="${esc(g.caption || 'Furniture made by Baraka Mini Hardware')}">${g.caption ? `<figcaption>${esc(g.caption)}</figcaption>` : ''}`;
+    fig.innerHTML = `<img src="${esc(g.url)}" loading="lazy" alt="${esc(g.caption || 'Furniture made by Baraka West Mini Hardware')}">${g.caption ? `<figcaption>${esc(g.caption)}</figcaption>` : ''}`;
     fig.addEventListener('click', () => openPhoto(g.url, g.caption || ''));
     grid.insertBefore(fig, grid.firstChild);
   });
@@ -219,7 +219,7 @@ function showListResult(){
   missing.forEach(m => logEvent('search_none', m.line));
   const total = Math.round(found.reduce((s, r) => s + r.product.price * r.qty, 0));
   const b = BRANCHES[state.branch];
-  const waText = encodeURIComponent(`Hi Baraka Mini Hardware, please price my list:\n${LIST_RESULT.map(r => '• ' + r.line).join('\n')}`);
+  const waText = encodeURIComponent(`Hi Baraka West Mini Hardware, please price my list:\n${LIST_RESULT.map(r => '• ' + r.line).join('\n')}`);
   openSiteModal(t('Paste a shopping list'), `
     ${found.length ? `<p style="font-size:13px;margin:8px 0 4px;color:#8C6A4E;font-weight:600;">${esc(t('We found'))}</p>
       ${found.map((r, i) => `<div class="list-line"><span>${esc(r.product.name)}<br><small>“${esc(r.line)}” · ${r.product.price > 0 ? `KES ${r.product.price.toLocaleString()}${r.product.unit ? ' / ' + esc(unitShort(r.product.unit)) : ''}` : esc(t('Ask for price'))}</small></span>
@@ -281,7 +281,7 @@ async function sendVisit(){
     openSiteModal(t('Book a measuring visit'), `
       <p style="font-size:16px;margin:14px 0 6px;"><b>${esc(t('Request sent! Your number is'))} ${esc(data.reference)}.</b></p>
       <p style="font-size:14px;color:rgba(59,42,32,.8);">${esc(t('We will call you on'))} ${esc(keep.phone)}. ${esc(t('Use your number and phone in "Track order" to check on it.'))}</p>
-      <a class="btn-gold-full press" target="_blank" rel="noreferrer" href="https://wa.me/${b.whatsapp}?text=${encodeURIComponent(`Hi Baraka Mini Hardware, this is ${keep.name} (${data.reference}). Here is a photo of my furniture:`)}">${esc(t('Send a photo of the sofa on WhatsApp'))}</a>`);
+      <a class="btn-gold-full press" target="_blank" rel="noreferrer" href="https://wa.me/${b.whatsapp}?text=${encodeURIComponent(`Hi Baraka West Mini Hardware, this is ${keep.name} (${data.reference}). Here is a photo of my furniture:`)}">${esc(t('Send a photo of the sofa on WhatsApp'))}</a>`);
   } catch (err) {
     openVisit(rpcMessage(err.code || ''), keep);
   }

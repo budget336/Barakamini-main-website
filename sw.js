@@ -1,4 +1,4 @@
-/* Baraka Mini Hardware website — works on a weak connection and offline.
+/* Baraka West Mini Hardware website — works on a weak connection and offline.
    Pages and pictures: network first, last copy when offline.
    Product prices and stock: network first, last copy when offline (so the price list still opens). */
 const VERSION = 'baraka-site-v1';
