@@ -193,6 +193,9 @@
   .product-img{height:160px;position:relative;overflow:hidden;}
   .product-fill{position:absolute;inset:0;transition:transform .5s ease;}
   .product-card:hover .product-fill{transform:scale(1.1);}
+  .avail{display:inline-block;font-size:11px;font-weight:600;padding:2px 9px;border-radius:999px;margin:0 0 6px;}
+  .avail.in{background:#E4EFE7;color:#2F6A4F;}
+  .avail.other{background:#F6EBDD;color:#8C6A4E;}
   .product-meta{position:absolute;top:8px;right:8px;background:rgba(245,240,230,.9);backdrop-filter:blur(4px);padding:2px 10px;border-radius:999px;font-size:9px;font-weight:600;text-transform:uppercase;letter-spacing:.05em;color:var(--espresso);}
   .product-body{padding:16px;}
   .product-body h3{font-size:16px;margin:0 0 4px;}
@@ -712,6 +715,7 @@ function renderProducts(){
       </div>
       <div class="product-body">
         <h3>${esc(p.name)}</h3>
+        ${availability(p)}
         <p>${esc(p.detail)}</p>
         <a class="btn-wa press" style="margin-top:10px; font-size:13px; padding:8px 14px;" target="_blank" rel="noreferrer" href="https://wa.me/${wa}?text=${encodeURIComponent('Hi Baraka Mini Hardware, is the ' + p.name + ' available? I would like a quote.')}">Ask about this item</a>
       </div>
@@ -767,7 +771,7 @@ function updateCalc(){
 }
 
 /* ================= EVENT HANDLERS ================= */
-function setBranch(id){ state.branch = id; renderBranch(); }
+function setBranch(id){ state.branch = id; renderBranch(); renderProducts(); }
 function setCat(id){ state.cat = id; renderCatTabs(); renderProducts(); }
 function setItem(id){ state.itemId = id; renderItemGrid(); updateCalc(); }
 function setTier(id){ state.tierId = id; renderTierGrid(); updateCalc(); }
@@ -828,6 +832,44 @@ const FALLBACK_SWATCHES = [
   "linear-gradient(135deg,#C9A15D,#8C6A4E)"
 ];
 
+// Which branch has each product: { productId: { town: qty, market: qty } }. Optional — the
+// catalogue still works if this cannot be loaded.
+let STOCK_BY_BRANCH = null;
+async function fetchBranchStock(){
+  try{
+    const opts = { headers: { "apikey": SUPABASE_ANON_KEY, "Authorization": `Bearer ${SUPABASE_ANON_KEY}` },
+                   signal: AbortSignal.timeout ? AbortSignal.timeout(10000) : undefined };
+    const [bRes, sRes] = await Promise.all([
+      fetch(`${SUPABASE_URL}/rest/v1/branches?select=id,name,short_name`, opts),
+      fetch(`${SUPABASE_URL}/rest/v1/branch_stock?select=branch_id,product_id,quantity`, opts)
+    ]);
+    if (!bRes.ok || !sRes.ok) return;
+    const branches = await bRes.json(), stock = await sRes.json();
+    const keyFor = {};
+    branches.forEach(b => {
+      const key = Object.keys(BRANCHES).find(k => BRANCHES[k].name.toLowerCase() === String(b.name).toLowerCase()
+        || (b.short_name && k === String(b.short_name).toLowerCase()));
+      if (key) keyFor[b.id] = key;
+    });
+    STOCK_BY_BRANCH = {};
+    stock.forEach(r => {
+      const key = keyFor[r.branch_id];
+      if (!key) return;
+      (STOCK_BY_BRANCH[r.product_id] = STOCK_BY_BRANCH[r.product_id] || {})[key] = Number(r.quantity);
+    });
+  }catch(err){
+    STOCK_BY_BRANCH = null;
+  }
+}
+
+function availability(p){
+  if (!STOCK_BY_BRANCH) return "";
+  const here = (STOCK_BY_BRANCH[p.id] || {})[state.branch] || 0;
+  if (here > 0) return `<div class="avail in">In stock at ${esc(BRANCHES[state.branch].name.replace('Kabarnet ', ''))}</div>`;
+  const other = Object.keys(BRANCHES).find(k => k !== state.branch && ((STOCK_BY_BRANCH[p.id] || {})[k] || 0) > 0);
+  return other ? `<div class="avail other">Available at our ${esc(BRANCHES[other].name.replace('Kabarnet ', ''))}</div>` : "";
+}
+
 async function fetchLiveProducts(){
   try{
     const res = await fetch(
@@ -879,7 +921,7 @@ async function init(){
   updateCalc();
   initWordSwap();
 
-  const ok = await fetchLiveProducts();
+  const [ok] = await Promise.all([fetchLiveProducts(), fetchBranchStock()]);
   catalogStatus = ok ? 'ready' : 'error';
   renderCatTabs();
   renderProducts();
