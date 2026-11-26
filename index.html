@@ -193,6 +193,17 @@
   .product-img{height:160px;position:relative;overflow:hidden;}
   .product-fill{position:absolute;inset:0;transition:transform .5s ease;}
   .product-card:hover .product-fill{transform:scale(1.1);}
+  .btn-reserve{display:inline-flex;margin:10px 0 0 6px;padding:8px 14px;font-size:13px;font-weight:600;border-radius:999px;border:1px solid rgba(34,29,26,.25);background:transparent;color:var(--charcoal);}
+  .btn-reserve:hover{background:var(--charcoal);color:var(--alabaster);}
+  .res-bar{position:fixed;right:20px;bottom:20px;z-index:60;background:var(--charcoal);color:var(--alabaster);border:0;border-radius:999px;padding:14px 22px;font-weight:700;font-size:14px;box-shadow:0 10px 30px rgba(0,0,0,.25);}
+  .res-backdrop{position:fixed;inset:0;background:rgba(20,15,12,.55);z-index:70;display:flex;align-items:center;justify-content:center;padding:16px;}
+  .res-backdrop[hidden]{display:none;}
+  .res-card{background:var(--alabaster);border-radius:16px;max-width:460px;width:100%;max-height:90vh;overflow:auto;padding:22px;}
+  .res-x{background:none;border:0;font-size:26px;line-height:1;color:var(--charcoal);}
+  .res-line{display:grid;grid-template-columns:1fr 86px auto;gap:8px;align-items:center;padding:8px 0;border-bottom:1px solid rgba(34,29,26,.12);font-size:14px;}
+  .res-line input,.res-field input,.res-field textarea{width:100%;padding:10px 12px;border:1px solid rgba(34,29,26,.2);border-radius:8px;font:inherit;background:#fff;}
+  .res-field{margin-top:12px;} .res-field label{display:block;font-size:12px;font-weight:600;text-transform:uppercase;letter-spacing:.06em;color:#8C6A4E;margin-bottom:4px;}
+  .res-err{color:#B3453A;font-size:13px;margin-top:10px;}
   .avail{display:inline-block;font-size:11px;font-weight:600;padding:2px 9px;border-radius:999px;margin:0 0 6px;}
   .avail.in{background:#E4EFE7;color:#2F6A4F;}
   .avail.other{background:#F6EBDD;color:#8C6A4E;}
@@ -401,6 +412,18 @@
     </div>
   </div>
 </section>
+
+<!-- ============ RESERVATION ============ -->
+<button id="resBar" class="res-bar press" type="button" onclick="openReservation()" hidden></button>
+<div id="resModal" class="res-backdrop" hidden>
+  <div class="res-card" role="dialog" aria-modal="true" aria-labelledby="resTitle">
+    <div style="display:flex;justify-content:space-between;align-items:center;gap:12px;">
+      <h3 id="resTitle" style="margin:0;font-size:22px;">Reserve for pickup</h3>
+      <button type="button" class="res-x" onclick="closeReservation()" aria-label="Close">&times;</button>
+    </div>
+    <div id="resBody"></div>
+  </div>
+</div>
 
 <!-- ============ CALCULATOR ============ -->
 <section class="calc wrap" id="calculator">
@@ -718,6 +741,7 @@ function renderProducts(){
         ${availability(p)}
         <p>${esc(p.detail)}</p>
         <a class="btn-wa press" style="margin-top:10px; font-size:13px; padding:8px 14px;" target="_blank" rel="noreferrer" href="https://wa.me/${wa}?text=${encodeURIComponent('Hi Baraka Mini Hardware, is the ' + p.name + ' available? I would like a quote.')}">Ask about this item</a>
+        <button class="btn-reserve press" type="button" onclick="addToReservation(${Number(p.id)})">Reserve for pickup</button>
       </div>
     </div>
   `).join('');
@@ -835,6 +859,7 @@ const FALLBACK_SWATCHES = [
 // Which branch has each product: { productId: { town: qty, market: qty } }. Optional — the
 // catalogue still works if this cannot be loaded.
 let STOCK_BY_BRANCH = null;
+const BRANCH_IDS = {}; // site key (town/market) -> branch id in the shop system
 async function fetchBranchStock(){
   try{
     const opts = { headers: { "apikey": SUPABASE_ANON_KEY, "Authorization": `Bearer ${SUPABASE_ANON_KEY}` },
@@ -849,7 +874,7 @@ async function fetchBranchStock(){
     branches.forEach(b => {
       const key = Object.keys(BRANCHES).find(k => BRANCHES[k].name.toLowerCase() === String(b.name).toLowerCase()
         || (b.short_name && k === String(b.short_name).toLowerCase()));
-      if (key) keyFor[b.id] = key;
+      if (key) { keyFor[b.id] = key; BRANCH_IDS[key] = b.id; }
     });
     STOCK_BY_BRANCH = {};
     stock.forEach(r => {
@@ -909,6 +934,82 @@ async function fetchLiveProducts(){
   }
   return true;
 }
+
+/* ================= RESERVE FOR PICKUP ================= */
+// Customers pick items, leave a name and phone, and the shop sees it in its admin
+// ("Website orders"). Nothing is paid online; they pay when they collect.
+let RESERVATION = [];
+try { RESERVATION = JSON.parse(localStorage.getItem('baraka_reservation') || '[]'); } catch (e) { RESERVATION = []; }
+function saveReservation(){
+  try { localStorage.setItem('baraka_reservation', JSON.stringify(RESERVATION)); } catch (e) {}
+  const bar = document.getElementById('resBar');
+  const n = RESERVATION.length;
+  bar.hidden = n === 0;
+  bar.textContent = `Reservation (${n} item${n === 1 ? '' : 's'}) →`;
+}
+function addToReservation(id){
+  const p = PRODUCTS.find(x => x.id === id);
+  if (!p) return;
+  if (!RESERVATION.some(r => r.id === id)) RESERVATION.push({ id, name: p.name, qty: 1 });
+  saveReservation();
+  openReservation();
+}
+function closeReservation(){ document.getElementById('resModal').hidden = true; }
+function openReservation(message){
+  const body = document.getElementById('resBody');
+  const b = BRANCHES[state.branch];
+  body.innerHTML = `
+    <p style="font-size:13.5px;color:rgba(59,42,32,.75);margin:6px 0 10px;">We keep these for you at <b>${esc(b.name)}</b>. Pay when you collect.</p>
+    ${RESERVATION.map((r, i) => `<div class="res-line"><span>${esc(r.name)}</span>
+      <input type="number" min="0.5" step="0.5" value="${r.qty}" aria-label="Quantity of ${esc(r.name)}" onchange="RESERVATION[${i}].qty=Math.max(0.5, Number(this.value)||1); saveReservation();">
+      <button type="button" class="res-x" style="font-size:20px;" aria-label="Remove ${esc(r.name)}" onclick="RESERVATION.splice(${i},1); saveReservation(); RESERVATION.length ? openReservation() : closeReservation();">&times;</button></div>`).join('')}
+    <div class="res-field"><label for="resName">Your name</label><input id="resName" autocomplete="name" maxlength="80"></div>
+    <div class="res-field"><label for="resPhone">Phone (M-Pesa / WhatsApp)</label><input id="resPhone" type="tel" autocomplete="tel" placeholder="07xx xxx xxx" maxlength="15"></div>
+    <div class="res-field"><label for="resNote">When will you pick up? (optional)</label><input id="resNote" maxlength="200" placeholder="e.g. Saturday morning"></div>
+    ${message ? `<div class="res-err">${esc(message)}</div>` : ''}
+    <button type="button" class="btn-gold-full press" id="resSend" onclick="sendReservation()">Reserve now</button>`;
+  document.getElementById('resModal').hidden = false;
+}
+async function sendReservation(){
+  const name = document.getElementById('resName').value.trim();
+  const phone = document.getElementById('resPhone').value.trim();
+  const note = document.getElementById('resNote').value.trim();
+  if (name.length < 2) return openReservationKeep('Please enter your name.', name, phone, note);
+  if (!/^(\+?254|0)?[17]\d{8}$/.test(phone.replace(/[\s-]/g, ''))) return openReservationKeep('Please enter a valid Kenyan phone number.', name, phone, note);
+  const btn = document.getElementById('resSend'); btn.disabled = true; btn.textContent = 'Sending…';
+  try {
+    const res = await fetch(`${SUPABASE_URL}/rest/v1/rpc/reserve_items`, {
+      method: 'POST',
+      headers: { "apikey": SUPABASE_ANON_KEY, "Authorization": `Bearer ${SUPABASE_ANON_KEY}`, "Content-Type": "application/json" },
+      body: JSON.stringify({ p_name: name, p_phone: phone.replace(/[\s-]/g, ''), p_branch_id: BRANCH_IDS[state.branch] || null,
+        p_items: RESERVATION.map(r => ({ product_id: r.id, quantity: r.qty })), p_note: note }),
+    });
+    const data = await res.json().catch(() => ({}));
+    if (!res.ok) {
+      const msg = String(data.message || '');
+      throw new Error(msg.includes('TOO_MANY') ? 'You have already sent reservations recently — we will call you shortly.'
+        : msg.includes('BUSY') ? 'Many reservations right now — please try again in a few minutes or WhatsApp us.'
+        : msg.includes('PHONE') ? 'Please enter a valid Kenyan phone number.' : 'Could not send. Please WhatsApp us instead.');
+    }
+    const ref = data.reservation || '';
+    const items = RESERVATION.map(r => `${r.qty} × ${r.name}`).join(', ');
+    RESERVATION = []; saveReservation();
+    const b = BRANCHES[state.branch];
+    document.getElementById('resBody').innerHTML = `
+      <p style="font-size:16px;margin:14px 0 6px;"><b>Reserved! Your number is ${esc(ref)}.</b></p>
+      <p style="font-size:14px;color:rgba(59,42,32,.8);">${esc(b.name)} will confirm on ${esc(phone)}. Pay when you collect.</p>
+      <a class="btn-gold-full press" target="_blank" rel="noreferrer" href="https://wa.me/${b.whatsapp}?text=${encodeURIComponent(`Hi Baraka Mini Hardware, I reserved ${items} (${ref}) on your website. My name is ${name}.`)}">Also tell us on WhatsApp</a>`;
+  } catch (err) {
+    openReservationKeep(err.message, name, phone, note);
+  }
+}
+function openReservationKeep(message, name, phone, note){
+  openReservation(message);
+  document.getElementById('resName').value = name; document.getElementById('resPhone').value = phone; document.getElementById('resNote').value = note;
+}
+document.getElementById('resModal').addEventListener('click', (e) => { if (e.target.id === 'resModal') closeReservation(); });
+document.addEventListener('keydown', (e) => { if (e.key === 'Escape') closeReservation(); });
+saveReservation();
 
 /* ================= INIT ================= */
 async function init(){
