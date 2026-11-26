@@ -1,11 +1,11 @@
 {
   "cleanUrls": true,
   "rewrites": [
-    { "source": "/mattresses", "destination": "/index.html" },
-    { "source": "/fabrics", "destination": "/index.html" },
-    { "source": "/leather", "destination": "/index.html" },
-    { "source": "/hardware", "destination": "/index.html" },
-    { "source": "/other-products", "destination": "/index.html" }
+    { "source": "/mattresses", "destination": "/" },
+    { "source": "/fabrics", "destination": "/" },
+    { "source": "/leather", "destination": "/" },
+    { "source": "/hardware", "destination": "/" },
+    { "source": "/other-products", "destination": "/" }
   ],
   "headers": [
     { "source": "/sw.js", "headers": [{ "key": "Cache-Control", "value": "no-cache" }] },
