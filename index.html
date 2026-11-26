@@ -813,7 +813,8 @@ const CATEGORIES = [
   { id:"fabric", label:"Premium Fabrics", short:"Fabrics" },
   { id:"leather", label:"Elite Furniture Leather", short:"Leather" },
   { id:"hardware", label:"Cabinetry & Joinery Hardware", short:"Hardware" },
-  { id:"other", label:"Other Products", short:"Other Products", hideWhenEmpty:true }
+  { id:"other", label:"Other Products", short:"Other Products", hideWhenEmpty:true },
+  { id:"offcut", label:"Offcut deals", short:"Offcuts", hideWhenEmpty:true }
 ];
 
 let PRODUCTS = []; // populated live from Supabase on page load
@@ -1102,8 +1103,8 @@ function noteQuote(){ if (!quoteLogged) { quoteLogged = true; logEvent('quote', 
 
 /* ================= EVENT HANDLERS ================= */
 function setBranch(id){ state.branch = id; renderBranch(); renderProducts(); }
-const CAT_PATHS = { mattress:'mattresses', fabric:'fabrics', leather:'leather', hardware:'hardware', other:'other-products' };
-const CAT_TITLES = { mattress:'Mattresses, foam & cushions', fabric:'Upholstery fabrics', leather:'Furniture leather', hardware:'Hardware', other:'Other products' };
+const CAT_PATHS = { mattress:'mattresses', fabric:'fabrics', leather:'leather', hardware:'hardware', other:'other-products', offcut:'offcuts' };
+const CAT_TITLES = { mattress:'Mattresses, foam & cushions', fabric:'Upholstery fabrics', leather:'Furniture leather', hardware:'Hardware', other:'Other products', offcut:'Offcut deals — fabric and foam pieces' };
 function setCat(id, fromUrl){
   state.cat = id; SEARCH = '';
   const box = document.getElementById('searchInput'); if (box) box.value = '';
@@ -1224,7 +1225,7 @@ function availability(p){
 async function fetchLiveProducts(){
   try{
     const res = await fetch(
-      `${SUPABASE_URL}/rest/v1/products?select=id,name,category,price,image_url,description,size,unit&order=name`,
+      `${SUPABASE_URL}/rest/v1/products?select=id,name,category,price,image_url,description,size,unit,parent_product_id&order=name`,
       {
         signal: AbortSignal.timeout ? AbortSignal.timeout(10000) : undefined,
         headers: {
@@ -1238,7 +1239,8 @@ async function fetchLiveProducts(){
 
     PRODUCTS = rows
       .map((row, i) => {
-        const catId = CATEGORY_NAME_TO_ID[row.category];
+        // Short pieces cut off a roll or foam block, sold cheaper: their own "Offcut deals" tab.
+        const catId = row.parent_product_id ? "offcut" : CATEGORY_NAME_TO_ID[row.category];
         if (!catId) return null; // skip anything with an unrecognized category
         return {
           id: row.id,

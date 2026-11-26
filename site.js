@@ -35,7 +35,7 @@ window.SW_DICT = {
   // departments and products
   'Mattresses & Cushions': 'Magodoro na Mito', 'Premium Fabrics': 'Vitambaa', 'Elite Furniture Leather': 'Ngozi ya fanicha',
   'Cabinetry & Joinery Hardware': 'Vifaa vya kabati na useremala', 'Other Products': 'Bidhaa nyingine',
-  'Mattresses': 'magodoro', 'Fabrics': 'vitambaa', 'Leather': 'ngozi', 'Hardware': 'vifaa',
+  'Offcut deals': 'Ofa za vipande', 'Offcuts': 'vipande', 'Mattresses': 'magodoro', 'Fabrics': 'vitambaa', 'Leather': 'ngozi', 'Hardware': 'vifaa',
   'Ask for price': 'Uliza bei', 'Loading products…': 'Inapakia bidhaa…', 'Fetching what is in stock right now.': 'Tunaangalia kilichopo sasa.',
   'We could not load the product list.': 'Hatukuweza kupakia orodha ya bidhaa.',
   'Check your connection, or reach us directly — we reply fast.': 'Angalia mtandao wako, au wasiliana nasi moja kwa moja — tunajibu haraka.',

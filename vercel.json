@@ -5,7 +5,8 @@
     { "source": "/fabrics", "destination": "/" },
     { "source": "/leather", "destination": "/" },
     { "source": "/hardware", "destination": "/" },
-    { "source": "/other-products", "destination": "/" }
+    { "source": "/other-products", "destination": "/" },
+    { "source": "/offcuts", "destination": "/" }
   ],
   "headers": [
     { "source": "/sw.js", "headers": [{ "key": "Cache-Control", "value": "no-cache" }] },
