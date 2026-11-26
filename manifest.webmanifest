@@ -1,0 +1,14 @@
+{
+  "name": "Baraka Mini Hardware — Kabarnet",
+  "short_name": "Baraka",
+  "description": "Today's prices, reserve for pickup, sofa quotes and order tracking.",
+  "start_url": "/",
+  "scope": "/",
+  "display": "standalone",
+  "background_color": "#F5F0E6",
+  "theme_color": "#3B2A20",
+  "icons": [
+    { "src": "/icon-192.png", "sizes": "192x192", "type": "image/png", "purpose": "any maskable" },
+    { "src": "/icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "any maskable" }
+  ]
+}

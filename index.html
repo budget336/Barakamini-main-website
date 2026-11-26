@@ -4,7 +4,7 @@
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>Baraka Mini Hardware — Kabarnet, Baringo</title>
-<meta name="description" content="Premium mattresses, designer fabrics, elite leather and cabinetry hardware in Kabarnet, Baringo County." />
+<meta name="description" content="Mattresses, upholstery fabrics, foam sheets, cushions, sofa accessories and general hardware in Kabarnet, Baringo. Live prices, reserve for pickup, instant upholstery quotes." />
 <meta name="theme-color" content="#3B2A20" />
 <link rel="canonical" href="https://barakamini-main-website.vercel.app/" />
 <meta property="og:type" content="website" />
@@ -12,14 +12,20 @@
 <meta property="og:title" content="Baraka Mini Hardware — Kabarnet, Baringo" />
 <meta property="og:description" content="Mattresses, upholstery fabrics, leather and cabinetry hardware. Two branches in Kabarnet. Chat with us on WhatsApp." />
 <meta property="og:url" content="https://barakamini-main-website.vercel.app/" />
-<meta name="twitter:card" content="summary" />
+<meta property="og:image" content="https://barakamini-main-website.vercel.app/images/og.jpg" />
+<meta property="og:image:width" content="1200" />
+<meta property="og:image:height" content="630" />
+<meta name="twitter:card" content="summary_large_image" />
+<link rel="manifest" href="/manifest.webmanifest" />
+<link rel="apple-touch-icon" href="/icon-192.png" />
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%233B2A20'/%3E%3Ctext x='32' y='44' font-family='Georgia,serif' font-size='36' text-anchor='middle' fill='%23C9A15D'%3EB%3C/text%3E%3C/svg%3E" />
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
   "@type": "HardwareStore",
   "name": "Baraka Mini Hardware",
-  "description": "Mattresses, upholstery fabrics, leather and cabinetry hardware in Kabarnet, Baringo County.",
+  "description": "Mattresses, upholstery fabrics, foam sheets, cushions, sofa accessories and general hardware in Kabarnet, Baringo County.",
+  "image": "https://barakamini-main-website.vercel.app/images/og.jpg",
   "url": "https://barakamini-main-website.vercel.app/",
   "telephone": "+254723068125",
   "email": "barakaminihardware@gmail.com",
@@ -109,7 +115,7 @@
 
   /* ---------- hero ---------- */
   .hero{position:relative;overflow:hidden;}
-  .hero-grid{display:grid;grid-template-columns:1.15fr .85fr;gap:56px;align-items:end;padding:56px 0 96px;}
+  .hero-grid{display:grid;grid-template-columns:1.15fr .85fr;gap:56px;align-items:end;padding:56px 20px 96px;}
   .hero h1{font-weight:400;font-size:58px;line-height:.98;letter-spacing:-.01em;margin:0 0 28px;}
   .hero h1 i{font-style:italic;color:#8C6A4E;}
   .word-swap-wrap{position:relative;display:inline-block;min-width:260px;vertical-align:baseline;height:1em;overflow:hidden;}
@@ -290,7 +296,7 @@
   @media (max-width: 860px){
     nav.links{display:none;}
     .menu-btn{display:block;}
-    .hero-grid{grid-template-columns:1fr;gap:40px;padding:40px 0 64px;}
+    .hero-grid{grid-template-columns:1fr;gap:40px;padding:40px 20px 64px;}
     .hero h1{font-size:42px;}
     .word-swap-wrap{min-width:180px;}
     .branch-card{grid-template-columns:1fr;}
@@ -308,6 +314,101 @@
     .product-grid{grid-template-columns:1fr 1fr;}
   }
 
+
+  /* ---------- deal bar, language, photos ---------- */
+  .deal-bar{background:var(--espresso);color:var(--alabaster);font-size:13.5px;padding:10px 20px;text-align:center;line-height:1.5;}
+  .deal-bar b{color:var(--gold);}
+  .deal-bar button{margin-left:10px;background:var(--gold);color:var(--charcoal);border:0;border-radius:999px;padding:5px 14px;font-weight:700;font-size:12.5px;}
+  .lang-btn{border:1px solid rgba(34,29,26,.25)!important;border-radius:999px;padding:6px 12px!important;}
+  .lang-btn::after{display:none;}
+  .hero-photo{margin:0;border-radius:16px;overflow:hidden;position:relative;box-shadow:0 30px 60px -30px rgba(34,29,26,.55);aspect-ratio:3/4;max-height:560px;}
+  .hero-grid > *{min-width:0;}
+  .hero-photo img{width:100%;height:100%;object-fit:cover;object-position:center 30%;}
+  .hero-photo figcaption{position:absolute;left:12px;right:12px;bottom:12px;background:rgba(34,29,26,.78);backdrop-filter:blur(6px);color:var(--alabaster);font-size:12.5px;line-height:1.5;padding:10px 14px;border-radius:10px;}
+  .open-pill{display:inline-block;font-size:11px;font-weight:700;padding:2px 9px;border-radius:999px;margin-right:8px;vertical-align:1px;}
+  .open-pill:empty{display:none;}
+  .open-pill.open{background:#2F6A4F;color:#fff;} .open-pill.closed{background:#7A3B32;color:#fff;}
+  .find-us{display:grid;grid-template-columns:.8fr 1.2fr;gap:28px;align-items:center;margin-top:28px;padding:24px;border-radius:16px;background:var(--alabaster-deep);border:1px solid rgba(34,29,26,.1);}
+  .find-us p{font-size:14.5px;line-height:1.7;color:rgba(59,42,32,.85);margin:0;}
+  .find-photos{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;}
+  .find-photos img{width:100%;height:auto;aspect-ratio:3/4;object-fit:cover;object-position:center 75%;border-radius:10px;cursor:zoom-in;}
+
+  /* ---------- search, list view ---------- */
+  .cat-tools{display:flex;flex-wrap:wrap;gap:12px;align-items:center;margin-bottom:18px;}
+  .search-box{flex:1 1 260px;display:flex;align-items:center;gap:8px;background:#fff;border:1px solid rgba(34,29,26,.2);border-radius:999px;padding:0 16px;}
+  .search-box svg{color:#8C6A4E;flex-shrink:0;}
+  .search-box input{border:0;outline:0;background:transparent;font:inherit;font-size:15px;padding:12px 0;width:100%;color:var(--charcoal);}
+  .view-toggle{display:inline-flex;padding:4px;border-radius:999px;background:var(--alabaster-deep);border:1px solid rgba(34,29,26,.1);}
+  .view-toggle button{border:0;background:transparent;padding:8px 14px;border-radius:999px;font-size:13px;font-weight:600;color:rgba(59,42,32,.7);}
+  .view-toggle button.active{background:var(--charcoal);color:var(--alabaster);}
+  .list-btn{padding:10px 18px;}
+  .price{font-family:'Fraunces',serif;font-size:19px;margin:4px 0 6px;color:var(--espresso);}
+  .price small{font-family:'Inter',sans-serif;font-size:12px;color:rgba(59,42,32,.6);}
+  .price-table{grid-column:1/-1;width:100%;border-collapse:collapse;background:var(--alabaster);border-radius:12px;overflow:hidden;font-size:14px;}
+  .price-table th{text-align:left;font-size:11px;text-transform:uppercase;letter-spacing:.12em;color:#8C6A4E;padding:12px;border-bottom:1px solid rgba(34,29,26,.15);}
+  .price-table td{padding:10px 12px;border-bottom:1px solid rgba(34,29,26,.08);vertical-align:middle;}
+  .price-table td.num{font-weight:600;white-space:nowrap;}
+  .price-table .btn-reserve{margin:0;}
+  .cat-chip{font-size:11px;color:#8C6A4E;}
+
+  /* ---------- quote ---------- */
+  .calc-select{width:100%;padding:12px 14px;border-radius:6px;border:1px solid rgba(34,29,26,.2);background:#fff;font:inherit;font-size:14px;color:var(--charcoal);}
+  .quote-box{background:rgba(245,240,230,.08);border:1px solid rgba(201,161,93,.35);border-radius:10px;padding:14px 16px;margin:0 0 20px;font-size:13.5px;}
+  .quote-box .q-row{display:flex;justify-content:space-between;gap:10px;margin-bottom:6px;color:rgba(245,240,230,.75);}
+  .quote-box .q-total{display:flex;justify-content:space-between;font-family:'Fraunces',serif;font-size:24px;color:var(--gold);margin-top:8px;padding-top:8px;border-top:1px dashed rgba(245,240,230,.25);}
+  .quote-box .q-note{font-size:11.5px;color:rgba(245,240,230,.55);margin-top:6px;line-height:1.5;}
+  .calc-wa{background:transparent;border:1px solid rgba(201,161,93,.6);color:var(--gold);margin-top:10px;}
+  .calc-wa:hover{background:rgba(201,161,93,.12);}
+
+  /* ---------- work, reviews, track ---------- */
+  section.work,section.reviews,section.track{padding:80px 20px 0;scroll-margin-top:80px;}
+  .work-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;}
+  .work-item{margin:0;border-radius:12px;overflow:hidden;background:var(--alabaster-deep);cursor:zoom-in;border:1px solid rgba(34,29,26,.1);}
+  .work-item img{width:100%;height:auto;aspect-ratio:4/5;object-fit:cover;transition:transform .5s ease;}
+  .work-item:hover img{transform:scale(1.04);}
+  .work-item figcaption{font-size:12.5px;padding:10px 12px;color:var(--espresso);}
+  .work-note{font-size:14px;color:rgba(59,42,32,.75);margin:18px 0 0;}
+  .review-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;}
+  .review-card{background:var(--alabaster-deep);border:1px solid rgba(34,29,26,.1);border-radius:12px;padding:20px;}
+  .review-card .stars{color:var(--copper);letter-spacing:2px;font-size:16px;}
+  .review-card p{font-size:14px;line-height:1.65;margin:10px 0;color:rgba(34,29,26,.85);}
+  .review-card small{font-size:12px;color:#8C6A4E;}
+  .track-card{display:grid;grid-template-columns:1fr 1fr;gap:32px;align-items:center;padding:32px;border-radius:16px;background:var(--alabaster-deep);border:1px solid rgba(34,29,26,.1);}
+  .track-form{display:grid;grid-template-columns:1fr 1fr auto;gap:10px;}
+  .track-form input{padding:12px 14px;border-radius:999px;border:1px solid rgba(34,29,26,.2);font:inherit;background:#fff;min-width:0;}
+  .track-result{grid-column:1/-1;font-size:14px;line-height:1.6;}
+  .track-result:empty{display:none;}
+  .track-steps{display:flex;gap:6px;margin:10px 0;flex-wrap:wrap;}
+  .track-steps span{font-size:11.5px;font-weight:600;padding:4px 10px;border-radius:999px;background:#fff;color:rgba(59,42,32,.5);border:1px solid rgba(34,29,26,.12);}
+  .track-steps span.done{background:#E4EFE7;color:#2F6A4F;border-color:#cfe3d5;}
+  .track-steps span.now{background:var(--charcoal);color:var(--alabaster);}
+  .stars-input{display:flex;gap:6px;margin:10px 0;}
+  .stars-input button{background:none;border:0;font-size:34px;color:#D9C8A8;padding:0;line-height:1;}
+  .stars-input button.on{color:var(--copper);}
+  .list-line{display:grid;grid-template-columns:1fr 80px auto;gap:8px;align-items:center;padding:7px 0;border-bottom:1px solid rgba(34,29,26,.1);font-size:14px;}
+  .list-line small{color:rgba(59,42,32,.6);}
+  .res-total{display:flex;justify-content:space-between;font-weight:700;font-size:15px;padding:10px 0 0;}
+  .photo-view{width:100%;border-radius:10px;margin-top:10px;}
+  .quick-contact{display:none;}
+
+  @media (max-width: 860px){
+    .find-us{grid-template-columns:1fr;}
+    .work-grid{grid-template-columns:repeat(2,1fr);}
+    .review-grid{grid-template-columns:1fr;}
+    .track-card{grid-template-columns:1fr;padding:24px;}
+    .hero-photo{max-height:420px;aspect-ratio:4/5;}
+    .quick-contact{display:flex;position:fixed;left:12px;bottom:12px;z-index:55;gap:8px;}
+    .quick-contact a{display:inline-flex;align-items:center;gap:6px;padding:11px 15px;border-radius:999px;font-weight:700;font-size:13px;box-shadow:0 8px 24px rgba(0,0,0,.2);}
+    .qc-call{background:var(--alabaster);color:var(--charcoal);border:1px solid rgba(34,29,26,.2);}
+    .qc-wa{background:#1F7A4D;color:#fff;}
+    .res-bar{bottom:70px;}
+    footer{padding-bottom:64px;}
+  }
+  @media (max-width: 520px){
+    .track-form{grid-template-columns:1fr;}
+    .price-table .hide-sm{display:none;}
+    .find-photos{grid-template-columns:repeat(3,1fr);gap:6px;}
+  }
   @media (prefers-reduced-motion: reduce){
     .word-swap{transition:none;}
     .swatch-card:hover,.product-card:hover,.feature-card:hover{transform:none;}
@@ -315,6 +416,9 @@
 </style>
 </head>
 <body>
+
+<!-- ============ DEAL OF THE WEEK (set from the admin) ============ -->
+<div id="dealBar" class="deal-bar" hidden></div>
 
 <!-- ============ HEADER ============ -->
 <header>
@@ -327,9 +431,12 @@
       </div>
     </div>
     <nav class="links">
-      <button onclick="scrollToId('catalog')">Departments</button>
-      <button onclick="scrollToId('calculator')">Fabric Calculator</button>
-      <button onclick="scrollToId('branches')">Branches</button>
+      <button onclick="scrollToId('catalog')" data-i18n="Prices">Prices</button>
+      <button onclick="scrollToId('calculator')" data-i18n="Instant quote">Instant quote</button>
+      <button onclick="scrollToId('work')" data-i18n="Our Work">Our Work</button>
+      <button onclick="scrollToId('branches')" data-i18n="Branches">Branches</button>
+      <button onclick="openTrack()" data-i18n="Track order">Track order</button>
+      <button class="lang-btn" onclick="toggleLang()" aria-label="Switch language">Kiswahili</button>
       <a class="btn-wa press" href="https://wa.me/254723068125" target="_blank" rel="noreferrer">
         <svg viewBox="0 0 24 24" fill="currentColor" width="16" height="16"><path d="M17.47 14.38c-.29-.14-1.71-.84-1.97-.94-.27-.1-.46-.14-.66.14-.2.29-.75.94-.92 1.13-.17.2-.34.22-.63.07-.29-.14-1.22-.45-2.32-1.43-.86-.76-1.44-1.71-1.6-2-.17-.29-.02-.44.13-.59.13-.13.29-.34.43-.5.14-.17.19-.29.29-.48.1-.2.05-.37-.02-.51-.07-.14-.66-1.59-.9-2.18-.24-.57-.48-.5-.66-.51h-.56c-.2 0-.51.07-.78.37-.27.29-1.02 1-1.02 2.44s1.05 2.83 1.19 3.02c.14.2 2.06 3.15 5 4.41.7.3 1.24.48 1.67.62.7.22 1.34.19 1.84.12.56-.08 1.71-.7 1.96-1.38.24-.68.24-1.26.17-1.38-.07-.12-.26-.2-.55-.34z"/><path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.75.46 3.45 1.32 4.95L2.05 22l5.29-1.39a9.87 9.87 0 0 0 4.7 1.2h.01c5.46 0 9.9-4.45 9.9-9.9C21.96 6.45 17.5 2 12.04 2zm0 18.1h-.01a8.2 8.2 0 0 1-4.19-1.15l-.3-.18-3.14.82.84-3.06-.2-.31a8.2 8.2 0 0 1-1.26-4.4c0-4.54 3.7-8.24 8.26-8.24 2.2 0 4.28.86 5.84 2.42a8.2 8.2 0 0 1 2.42 5.83c0 4.55-3.7 8.27-8.26 8.27z"/></svg>
         WhatsApp Us
@@ -340,9 +447,12 @@
     </button>
   </div>
   <div class="mobile-menu" id="mobileMenu">
-    <button onclick="scrollToId('catalog');toggleMenu()">Departments</button>
-    <button onclick="scrollToId('calculator');toggleMenu()">Fabric Calculator</button>
-    <button onclick="scrollToId('branches');toggleMenu()">Branches</button>
+    <button onclick="scrollToId('catalog');toggleMenu()" data-i18n="Prices">Prices</button>
+    <button onclick="scrollToId('calculator');toggleMenu()" data-i18n="Instant quote">Instant quote</button>
+    <button onclick="scrollToId('work');toggleMenu()" data-i18n="Our Work">Our Work</button>
+    <button onclick="scrollToId('branches');toggleMenu()" data-i18n="Branches">Branches</button>
+    <button onclick="openTrack();toggleMenu()" data-i18n="Track order">Track order</button>
+    <button class="lang-btn" onclick="toggleLang();toggleMenu()">Kiswahili</button>
     <a class="btn-wa press" style="justify-content:center" href="https://wa.me/254723068125" target="_blank" rel="noreferrer">WhatsApp Us</a>
   </div>
 </header>
@@ -351,31 +461,30 @@
 <section class="hero">
   <div class="wrap hero-grid">
     <div>
-      <div class="eyebrow"><span class="line"></span><span>Kabarnet's Interior &amp; Upholstery House</span></div>
+      <div class="eyebrow"><span class="line"></span><span data-i18n="Kabarnet's Interior & Upholstery House">Kabarnet's Interior &amp; Upholstery House</span></div>
       <h1>
-        Transforming Baringo interiors,<br>
-        <i>one</i>
+        <span data-i18n="Transforming Baringo interiors,">Transforming Baringo interiors,</span><br>
+        <i data-i18n="one">one</i>
         <span class="word-swap-wrap" id="wordSwapWrap">
           <span class="word-swap is-active">Mattresses.</span>
           <span class="word-swap">Fabrics.</span>
-          <span class="word-swap">Leather.</span>
+          <span class="word-swap">Foam.</span>
           <span class="word-swap">Hardware.</span>
         </span>
       </h1>
-      <p class="lead">From orthopedic mattresses to heavyweight Chinese textiles, genuine leather and cabinetry hardware — Baraka Mini Hardware supplies homeowners, tailors and carpenters across Baringo County with materials built to last.</p>
+      <p class="lead" data-i18n="hero-lead">Mattresses, upholstery fabrics, foam sheets, cushions, sofa accessories and general hardware — Baraka Mini Hardware supplies homeowners, tailors and carpenters across Baringo County with materials built to last.</p>
       <div class="hero-ctas">
-        <button class="btn-primary press" onclick="scrollToId('catalog')">Browse Fabrics &amp; Leather</button>
-        <button class="btn-outline press" onclick="scrollToId('branches')">Find Our Branches</button>
+        <button class="btn-primary press" onclick="scrollToId('catalog')" data-i18n="See today's prices">See today's prices</button>
+        <button class="btn-outline press" onclick="scrollToId('calculator')" data-i18n="Get a sofa quote">Get a sofa quote</button>
+        <button class="btn-outline press" onclick="scrollToId('branches')" data-i18n="Find Our Branches">Find Our Branches</button>
       </div>
     </div>
     <div>
-      <div class="swatch-rail">
-        <div class="swatch-card"><div class="swatch-fill" style="background:linear-gradient(160deg,#3B2A20,#5C4531)"></div><div class="swatch-label">Heavy Chinese Textile</div></div>
-        <div class="swatch-card"><div class="swatch-fill" style="background:linear-gradient(160deg,#1F4A44,#2F6A61)"></div><div class="swatch-label">Crushed Velvet</div></div>
-        <div class="swatch-card"><div class="swatch-fill" style="background:linear-gradient(160deg,#4A2E1E,#6B4530)"></div><div class="swatch-label">Genuine Leather</div></div>
-        <div class="swatch-card"><div class="swatch-fill" style="background:linear-gradient(160deg,#B87A4A,#C9A15D)"></div><div class="swatch-label">Brushed Copper Hardware</div></div>
-      </div>
-      <p class="swatch-caption">A glimpse from our swatch library — 200+ materials in-store</p>
+      <figure class="hero-photo">
+        <img src="/images/shop-front.webp" srcset="/images/shop-front-sm.webp 560w, /images/shop-front.webp 1100w" sizes="(max-width: 860px) 92vw, 440px"
+             width="1100" height="1467" alt="Baraka West Mini Hardware shop front in Kabarnet with mattresses, foam and fabric rolls outside" fetchpriority="high">
+        <figcaption><span class="open-pill" id="heroOpen"></span><span data-i18n="Mattresses, foam and fabric rolls — come see and touch before you buy.">Mattresses, foam and fabric rolls — come see and touch before you buy.</span></figcaption>
+      </figure>
     </div>
   </div>
 </section>
@@ -393,14 +502,37 @@
   <div class="branch-card" id="branchCard">
     <!-- filled by JS -->
   </div>
+
+  <div class="find-us">
+    <div>
+      <div class="col-label" data-i18n="How to find us">How to find us</div>
+      <p data-i18n="find-us-text">Look for the lime-green Shalom Guest House building — Baraka West Mini Hardware is on the ground floor with mattresses and foam outside. Our white sign by the road points the way.</p>
+    </div>
+    <div class="find-photos">
+      <img src="/images/building-sm.webp" width="560" height="747" loading="lazy" alt="The green Shalom Guest House building with Baraka West Mini Hardware on the ground floor" onclick="openPhoto(this.src.replace('-sm',''), this.alt)">
+      <img src="/images/road-sign-sm.webp" width="560" height="747" loading="lazy" alt="Roadside sign: Baraka West, dealers in fabrics, foam sheets, cushions, mattresses, sofa accessories and general hardware" onclick="openPhoto(this.src.replace('-sm',''), this.alt)">
+      <img src="/images/street-sm.webp" width="560" height="747" loading="lazy" alt="The road leading to the shop, with the Baraka West sign on the right" onclick="openPhoto(this.src.replace('-sm',''), this.alt)">
+    </div>
+  </div>
 </section>
 
 <!-- ============ CATALOG ============ -->
 <section class="catalog" id="catalog">
   <div class="wrap">
-    <div class="eyebrow"><span class="line"></span><span>The Departments</span></div>
-    <h2 class="section-title">Every material under one roof</h2>
+    <div class="eyebrow"><span class="line"></span><span data-i18n="Today's prices">Today's prices</span></div>
+    <h2 class="section-title" data-i18n="Every material under one roof">Every material under one roof</h2>
 
+    <div class="cat-tools">
+      <div class="search-box">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="18" height="18" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="M20 20l-3.5-3.5"/></svg>
+        <input id="searchInput" type="search" placeholder="Search e.g. foam, velvet, nails…" data-i18n-ph="Search e.g. foam, velvet, nails…" aria-label="Search products" autocomplete="off">
+      </div>
+      <div class="view-toggle" role="group" aria-label="View">
+        <button id="viewCards" class="active" onclick="setView('cards')" data-i18n="Cards">Cards</button>
+        <button id="viewList" onclick="setView('list')" data-i18n="Price list">Price list</button>
+      </div>
+      <button class="btn-outline press list-btn" onclick="openListPaste()" data-i18n="Paste a shopping list">Paste a shopping list</button>
+    </div>
     <div class="cat-tabs" id="catTabs"></div>
     <div class="product-grid" id="productGrid"></div>
 
@@ -427,19 +559,23 @@
 
 <!-- ============ CALCULATOR ============ -->
 <section class="calc wrap" id="calculator">
-  <div class="eyebrow"><span class="line"></span><span>Plan Your Order</span></div>
-  <h2 class="section-title" style="margin-bottom:12px">Upholstery &amp; fabric calculator</h2>
-  <p class="calc-intro">For tailors, carpenters and homeowners — get an instant material estimate before you visit, then confirm exact pricing and stock over WhatsApp.</p>
+  <div class="eyebrow"><span class="line"></span><span data-i18n="Instant quote">Instant quote</span></div>
+  <h2 class="section-title" style="margin-bottom:12px" data-i18n="What will your sofa cost?">What will your sofa cost?</h2>
+  <p class="calc-intro" data-i18n="calc-intro">Pick the item and fabric — we work out the metres and price from today's prices. Happy with it? Book a measuring visit and we come to you.</p>
 
   <div class="calc-card">
     <div class="calc-left">
       <div class="calc-block">
-        <div class="col-label" style="margin-bottom:12px">1. Item Type</div>
+        <div class="col-label" style="margin-bottom:12px" data-i18n="1. Item Type">1. Item Type</div>
         <div class="opt-grid" id="itemGrid"></div>
       </div>
       <div class="calc-block">
-        <div class="col-label" style="margin-bottom:12px">2. Material Tier</div>
+        <div class="col-label" style="margin-bottom:12px" data-i18n="2. Material Tier">2. Material Tier</div>
         <div id="tierGrid"></div>
+      </div>
+      <div class="calc-block" id="fabricBlock" hidden>
+        <div class="col-label" style="margin-bottom:12px" data-i18n="Fabric from our shop (today's price)">Fabric from our shop (today's price)</div>
+        <select id="fabricSelect" class="calc-select" onchange="updateCalc()"></select>
       </div>
       <div class="calc-block">
         <div class="qty-label"><span>3. Quantity (<span id="qtyUnit">sofa</span>s)</span> <b id="qtyVal">1</b></div>
@@ -450,20 +586,59 @@
 
     <div class="calc-right">
       <div>
-        <span class="label">Estimated Requirement</span>
+        <span class="label" data-i18n="Estimated Requirement">Estimated Requirement</span>
         <div class="calc-result" id="calcResult">7.5<span>m</span></div>
         <p class="desc" id="calcDesc"></p>
+        <div class="quote-box" id="quoteBox" hidden></div>
         <hr class="stitch" style="border-top-color:rgba(245,240,230,.2)">
-        <div class="summary-row"><span>Item</span><span id="sumItem">3-Seater Sofa</span></div>
-        <div class="summary-row"><span>Material</span><span id="sumTier">Premium Light Chinese Fabric</span></div>
-        <div class="summary-row"><span>Quantity</span><span id="sumQty">1</span></div>
-        <div class="summary-row"><span>Branch</span><span id="sumBranch">Kabarnet Town Branch</span></div>
+        <div class="summary-row"><span data-i18n="Item">Item</span><span id="sumItem">3-Seater Sofa</span></div>
+        <div class="summary-row"><span data-i18n="Material">Material</span><span id="sumTier">Premium Light Chinese Fabric</span></div>
+        <div class="summary-row"><span data-i18n="Quantity">Quantity</span><span id="sumQty">1</span></div>
+        <div class="summary-row"><span data-i18n="Branch">Branch</span><span id="sumBranch">Kabarnet Town Branch</span></div>
       </div>
-      <a class="btn-gold-full press" id="calcWaBtn" href="#" target="_blank" rel="noreferrer">
+      <button type="button" class="btn-gold-full press" onclick="openVisit()" data-i18n="Book a measuring visit">Book a measuring visit</button>
+      <a class="btn-gold-full press calc-wa" id="calcWaBtn" href="#" target="_blank" rel="noreferrer">
         <svg viewBox="0 0 24 24" fill="currentColor" width="16" height="16"><path d="M17.47 14.38c-.29-.14-1.71-.84-1.97-.94-.27-.1-.46-.14-.66.14-.2.29-.75.94-.92 1.13-.17.2-.34.22-.63.07-.29-.14-1.22-.45-2.32-1.43-.86-.76-1.44-1.71-1.6-2-.17-.29-.02-.44.13-.59.13-.13.29-.34.43-.5.14-.17.19-.29.29-.48.1-.2.05-.37-.02-.51-.07-.14-.66-1.59-.9-2.18-.24-.57-.48-.5-.66-.51h-.56c-.2 0-.51.07-.78.37-.27.29-1.02 1-1.02 2.44s1.05 2.83 1.19 3.02c.14.2 2.06 3.15 5 4.41.7.3 1.24.48 1.67.62.7.22 1.34.19 1.84.12.56-.08 1.71-.7 1.96-1.38.24-.68.24-1.26.17-1.38-.07-.12-.26-.2-.55-.34z"/><path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.75.46 3.45 1.32 4.95L2.05 22l5.29-1.39a9.87 9.87 0 0 0 4.7 1.2h.01c5.46 0 9.9-4.45 9.9-9.9C21.96 6.45 17.5 2 12.04 2zm0 18.1h-.01a8.2 8.2 0 0 1-4.19-1.15l-.3-.18-3.14.82.84-3.06-.2-.31a8.2 8.2 0 0 1-1.26-4.4c0-4.54 3.7-8.24 8.26-8.24 2.2 0 4.28.86 5.84 2.42a8.2 8.2 0 0 1 2.42 5.83c0 4.55-3.7 8.27-8.26 8.27z"/></svg>
-        Inquire Availability via WhatsApp
+        <span data-i18n="Ask on WhatsApp">Ask on WhatsApp</span>
       </a>
     </div>
+  </div>
+</section>
+
+<!-- ============ OUR WORK (photos from the admin) ============ -->
+<section class="work wrap" id="work">
+  <div class="eyebrow"><span class="line"></span><span data-i18n="Our Work">Our Work</span></div>
+  <h2 class="section-title" data-i18n="Sofas and seats we have made">Sofas and seats we have made</h2>
+  <div class="work-grid" id="workGrid">
+    <figure class="work-item" onclick="openPhoto('/images/shop-front.webp', this.querySelector('img').alt)">
+      <img src="/images/shop-front-sm.webp" width="560" height="747" loading="lazy" alt="Mattresses, foam and fabric rolls outside our shop">
+      <figcaption data-i18n="In the shop today">In the shop today</figcaption>
+    </figure>
+  </div>
+  <p class="work-note" id="workNote" data-i18n="work-note">Want yours re-done? Get an instant quote above, or send us a photo of your sofa on WhatsApp.</p>
+</section>
+
+<!-- ============ REVIEWS (approved in the admin) ============ -->
+<section class="reviews wrap" id="reviews" hidden>
+  <div class="eyebrow"><span class="line"></span><span data-i18n="What customers say">What customers say</span></div>
+  <h2 class="section-title" id="reviewsTitle"></h2>
+  <div class="review-grid" id="reviewGrid"></div>
+</section>
+
+<!-- ============ TRACK ============ -->
+<section class="track wrap" id="track">
+  <div class="track-card">
+    <div>
+      <div class="eyebrow"><span class="line"></span><span data-i18n="Track order">Track order</span></div>
+      <h2 class="section-title" style="margin-bottom:8px" data-i18n="Where is my order?">Where is my order?</h2>
+      <p class="calc-intro" style="margin:0" data-i18n="track-intro">Enter the number we gave you (like R-12, V-3, JOB-8, LB-4 or D-2) and your phone number.</p>
+    </div>
+    <form class="track-form" onsubmit="event.preventDefault(); runTrack(this)">
+      <input name="ref" placeholder="e.g. JOB-8" maxlength="20" required aria-label="Order number">
+      <input name="phone" type="tel" placeholder="07xx xxx xxx" maxlength="15" required aria-label="Phone number">
+      <button class="btn-primary press" type="submit" data-i18n="Check">Check</button>
+      <div class="track-result" id="trackResult" role="status"></div>
+    </form>
   </div>
 </section>
 
@@ -504,6 +679,23 @@
   </div>
 </section>
 
+<!-- ============ GENERIC DIALOG (shopping list, visit, review, photos) ============ -->
+<div id="siteModal" class="res-backdrop" hidden>
+  <div class="res-card" role="dialog" aria-modal="true" aria-labelledby="siteModalTitle">
+    <div style="display:flex;justify-content:space-between;align-items:center;gap:12px;">
+      <h3 id="siteModalTitle" style="margin:0;font-size:22px;"></h3>
+      <button type="button" class="res-x" onclick="closeSiteModal()" aria-label="Close">&times;</button>
+    </div>
+    <div id="siteModalBody"></div>
+  </div>
+</div>
+
+<!-- ============ QUICK CONTACT (phones) ============ -->
+<div class="quick-contact" id="quickContact">
+  <a href="tel:+254723068125" class="qc-call" aria-label="Call the shop"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="20" height="20"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg><span data-i18n="Call">Call</span></a>
+  <a href="https://wa.me/254723068125" target="_blank" rel="noreferrer" class="qc-wa" aria-label="WhatsApp the shop"><svg viewBox="0 0 24 24" fill="currentColor" width="20" height="20"><path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.75.46 3.45 1.32 4.95L2.05 22l5.29-1.39a9.87 9.87 0 0 0 4.7 1.2h.01c5.46 0 9.9-4.45 9.9-9.9C21.96 6.45 17.5 2 12.04 2z"/></svg>WhatsApp</a>
+</div>
+
 <!-- ============ FOOTER ============ -->
 <footer>
   <div class="wrap footer-top">
@@ -513,7 +705,7 @@
           <div class="foot-mark"><span>B</span></div>
           <span class="foot-name">Baraka Mini Hardware</span>
         </div>
-        <p class="foot-desc">Kabarnet's home for premium mattresses, designer fabrics, elite leather and cabinetry hardware.</p>
+        <p class="foot-desc" data-i18n="foot-desc">Fabrics, foam sheets, cushions, mattresses, sofa accessories and general hardware in Kabarnet.</p>
         <a class="foot-email" href="mailto:barakaminihardware@gmail.com" style="margin-top:14px">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" width="14" height="14"><path d="M4 4h16v16H4z" opacity="0"/><path d="M22 6l-10 7L2 6"/><rect x="2" y="4" width="20" height="16" rx="2"/></svg>
           barakaminihardware@gmail.com
@@ -588,6 +780,8 @@ const BRANCHES = {
     phoneTel: PHONE_TEL,
     whatsapp: WA_NUMBER,
     hours: [["Mon – Fri","8:00am – 6:30pm"],["Saturday","8:00am – 7:00pm"],["Sunday","2:00pm – 6:00pm"]],
+    // [open, close] in hours (Kenya time), by day: 0 = Sunday … 6 = Saturday. null = closed.
+    open: [[14,18],[8,18.5],[8,18.5],[8,18.5],[8,18.5],[8,18.5],[8,19]],
     focus: "Our largest floor — full mattress gallery, the complete fabric swatch library, and made-to-order upholstery consultations.",
     stock: ["Full mattress showroom","200+ fabric swatches on site","Leather & vinyl rolls","In-house tailoring desk"]
   },
@@ -599,6 +793,7 @@ const BRANCHES = {
     phoneTel: PHONE_TEL,
     whatsapp: WA_NUMBER,
     hours: [["Mon – Fri","7:30am – 6:00pm"],["Saturday","7:30am – 7:00pm"],["Sunday","Closed"]],
+    open: [null,[7.5,18],[7.5,18],[7.5,18],[7.5,18],[7.5,18],[7.5,19]],
     focus: "Our trade counter — bulk fabric rolls, foam blocks, and the full cabinetry & joinery hardware catalog for carpenters and contractors.",
     stock: ["Bulk foam & fabric rolls","Hinges, sliders & handles","Trade pricing counter","Same-day carpenter pickup"]
   }
@@ -642,6 +837,57 @@ let state = {
 
 const waIcon = `<svg viewBox="0 0 24 24" fill="currentColor" width="14" height="14"><path d="M17.47 14.38c-.29-.14-1.71-.84-1.97-.94-.27-.1-.46-.14-.66.14-.2.29-.75.94-.92 1.13-.17.2-.34.22-.63.07-.29-.14-1.22-.45-2.32-1.43-.86-.76-1.44-1.71-1.6-2-.17-.29-.02-.44.13-.59.13-.13.29-.34.43-.5.14-.17.19-.29.29-.48.1-.2.05-.37-.02-.51-.07-.14-.66-1.59-.9-2.18-.24-.57-.48-.5-.66-.51h-.56c-.2 0-.51.07-.78.37-.27.29-1.02 1-1.02 2.44s1.05 2.83 1.19 3.02c.14.2 2.06 3.15 5 4.41.7.3 1.24.48 1.67.62.7.22 1.34.19 1.84.12.56-.08 1.71-.7 1.96-1.38.24-.68.24-1.26.17-1.38-.07-.12-.26-.2-.55-.34z"/><path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.75.46 3.45 1.32 4.95L2.05 22l5.29-1.39a9.87 9.87 0 0 0 4.7 1.2h.01c5.46 0 9.9-4.45 9.9-9.9C21.96 6.45 17.5 2 12.04 2zm0 18.1h-.01a8.2 8.2 0 0 1-4.19-1.15l-.3-.18-3.14.82.84-3.06-.2-.31a8.2 8.2 0 0 1-1.26-4.4c0-4.54 3.7-8.24 8.26-8.24 2.2 0 4.28.86 5.84 2.42a8.2 8.2 0 0 1 2.42 5.83c0 4.55-3.7 8.27-8.26 8.27z"/></svg>`;
 
+/* ================= LANGUAGE ================= */
+// Kiswahili words live in site.js (SW_DICT). t() falls back to English.
+let LANG = 'en';
+try { LANG = localStorage.getItem('baraka_lang') === 'sw' ? 'sw' : 'en'; } catch (e) {}
+function t(en){ return (LANG === 'sw' && window.SW_DICT && window.SW_DICT[en]) || en; }
+
+/* ================= SMALL HELPERS ================= */
+const UNIT_SHORT = { piece:'pc', metre:'m', kg:'kg', bag:'bag', roll:'roll', sheet:'sheet', litre:'L', pair:'pair', box:'box', set:'set', length:'length' };
+function unitShort(u){ return UNIT_SHORT[u] || u || ''; }
+function priceHtml(p){
+  return p.price > 0 ? `KES ${p.price.toLocaleString()}${p.unit ? ` <small>/ ${esc(unitShort(p.unit))}</small>` : ''}` : `<small>${esc(t('Ask for price'))}</small>`;
+}
+// Opening hours in Kenya time, whatever the visitor's phone clock says.
+function kenyaNow(){
+  const parts = Object.fromEntries(new Intl.DateTimeFormat('en-US', { timeZone:'Africa/Nairobi', weekday:'short', hour:'numeric', minute:'numeric', hour12:false })
+    .formatToParts(new Date()).map(x => [x.type, x.value]));
+  const day = ['Sun','Mon','Tue','Wed','Thu','Fri','Sat'].indexOf(parts.weekday);
+  return { day, hour: (Number(parts.hour) % 24) + Number(parts.minute) / 60 };
+}
+function clock(h){
+  const hh = Math.floor(h), mm = Math.round((h - hh) * 60);
+  return `${((hh + 11) % 12) + 1}:${String(mm).padStart(2, '0')}${hh < 12 ? 'am' : 'pm'}`;
+}
+function openStatus(key){
+  const b = BRANCHES[key], now = kenyaNow(), today = b.open[now.day];
+  if (today && now.hour >= today[0] && now.hour < today[1]) return { open:true, text:`${t('Open now')} · ${t('closes')} ${clock(today[1])}` };
+  for (let i = 0; i < 7; i++) {
+    const d = (now.day + i) % 7, h = b.open[d];
+    if (!h || (i === 0 && now.hour >= h[0])) continue;
+    const when = i === 0 ? t('today') : i === 1 ? t('tomorrow') : t(['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'][d]);
+    return { open:false, text:`${t('Closed')} · ${t('opens')} ${when} ${clock(h[0])}` };
+  }
+  return { open:false, text:t('Closed') };
+}
+async function rpc(name, body){
+  const res = await fetch(`${SUPABASE_URL}/rest/v1/rpc/${name}`, {
+    method:'POST', headers:{ "apikey":SUPABASE_ANON_KEY, "Authorization":`Bearer ${SUPABASE_ANON_KEY}`, "Content-Type":"application/json" },
+    body: JSON.stringify(body || {}), signal: AbortSignal.timeout ? AbortSignal.timeout(12000) : undefined });
+  const data = await res.json().catch(() => ({}));
+  if (!res.ok) { const e = new Error(String(data.message || 'FAILED')); e.code = String(data.message || ''); throw e; }
+  return data;
+}
+// Counts what people look at and search for (no names, no phone numbers). Never blocks the page.
+function logEvent(kind, key){
+  try {
+    fetch(`${SUPABASE_URL}/rest/v1/rpc/log_site_event`, { method:'POST', keepalive:true,
+      headers:{ "apikey":SUPABASE_ANON_KEY, "Authorization":`Bearer ${SUPABASE_ANON_KEY}`, "Content-Type":"application/json" },
+      body: JSON.stringify({ p_kind: kind, p_key: String(key) }) }).catch(() => {});
+  } catch (e) {}
+}
+
 /* ================= SAFETY HELPERS ================= */
 // Product text comes from the database, so it is escaped before going into HTML.
 function esc(value){
@@ -671,24 +917,28 @@ function renderBranch(){
       <div class="glow"></div>
       <span class="branch-tag">${b.tag}</span>
       <h3>${b.name}</h3>
+      <span class="open-pill ${openStatus(state.branch).open ? 'open' : 'closed'}">${esc(openStatus(state.branch).text)}</span>
       <p class="focus">${b.focus}</p>
       <div class="branch-row">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" width="16" height="16"><path d="M12 21s-7-6.1-7-11.5A7 7 0 0 1 12 2.5a7 7 0 0 1 7 7C19 14.9 12 21 12 21z"/><circle cx="12" cy="9.5" r="2.3"/></svg>
-        <span>${b.address}<br><a class="map-link" href="${mapsLink(b.address)}" target="_blank" rel="noreferrer">Get directions</a></span>
+        <span>${b.address}<br><a class="map-link" href="${mapsLink(b.address)}" target="_blank" rel="noreferrer">${t('Get directions')}</a></span>
       </div>
       <div class="branch-row">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" width="16" height="16"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
         <a href="tel:${b.phoneTel}">${b.phoneDisplay}</a>
       </div>
-      <a class="btn-gold press" href="https://wa.me/${b.whatsapp}" target="_blank" rel="noreferrer">${waIcon} Chat with this branch</a>
+      <a class="btn-gold press" href="https://wa.me/${b.whatsapp}" target="_blank" rel="noreferrer">${waIcon} ${t('Chat with this branch')}</a>
     </div>
     <div class="branch-right">
-      <div class="col-label">Operating Hours</div>
+      <div class="col-label">${t('Operating Hours')}</div>
       <div style="margin-bottom:28px">${hoursHtml}</div>
-      <div class="col-label">What's on this floor</div>
+      <div class="col-label">${t("What's on this floor")}</div>
       <ul class="stock-list">${stockHtml}</ul>
     </div>
   `;
+
+  const hero = document.getElementById('heroOpen');
+  if (hero) { const o = openStatus(state.branch); hero.className = `open-pill ${o.open ? 'open' : 'closed'}`; hero.textContent = o.text; }
 
   // sync calculator branch summary + WA links
   document.getElementById('sumBranch').textContent = b.name;
@@ -700,48 +950,71 @@ function renderCatTabs(){
   const wrap = document.getElementById('catTabs');
   const visible = CATEGORIES.filter(c => !c.hideWhenEmpty || PRODUCTS.some(p => p.cat === c.id));
   wrap.innerHTML = visible.map(c =>
-    `<button class="cat-tab press ${c.id === state.cat ? 'active' : ''}" onclick="setCat('${c.id}')">${c.label}</button>`
+    `<a href="/${CAT_PATHS[c.id]}" class="cat-tab press ${c.id === state.cat && !SEARCH ? 'active' : ''}" onclick="event.preventDefault(); setCat('${c.id}')">${esc(t(c.label))}</a>`
   ).join('');
 }
 
 let catalogStatus = 'loading'; // 'loading' | 'ready' | 'error'
 
-function catalogMessage(title, body){
+function catalogMessage(title, body, searched){
   const b = BRANCHES[state.branch];
   const cat = CATEGORIES.find(c => c.id === state.cat);
-  const msg = encodeURIComponent(`Hi Baraka Mini Hardware, what ${cat.label} do you have in stock?`);
+  const msg = encodeURIComponent(searched ? `Hi Baraka Mini Hardware, do you have ${searched}?` : `Hi Baraka Mini Hardware, what ${cat.label} do you have in stock?`);
   return `<div class="catalog-status" role="status"><b>${title}</b>${body}
-    <br><a href="https://wa.me/${b.whatsapp}?text=${msg}" target="_blank" rel="noreferrer">Ask us on WhatsApp</a> or call <a href="tel:${b.phoneTel}">${b.phoneDisplay}</a>.</div>`;
+    <br><a href="https://wa.me/${b.whatsapp}?text=${msg}" target="_blank" rel="noreferrer">${t('Ask us on WhatsApp')}</a> ${t('or call')} <a href="tel:${b.phoneTel}">${b.phoneDisplay}</a>.</div>`;
+}
+
+let SEARCH = '';
+let VIEW = 'cards';
+function searchMatches(p, q){
+  const hay = `${p.name} ${p.detail} ${p.catLabel} ${p.size || ''}`.toLowerCase();
+  return q.split(/\s+/).filter(Boolean).every(w => hay.includes(w) || (w.length > 3 && w.endsWith('s') && hay.includes(w.slice(0, -1))));
+}
+function visibleProducts(){
+  const q = SEARCH.trim().toLowerCase();
+  return q ? PRODUCTS.filter(p => searchMatches(p, q)) : PRODUCTS.filter(p => p.cat === state.cat);
 }
 
 function renderProducts(){
   const grid = document.getElementById('productGrid');
   if (catalogStatus === 'loading') {
-    grid.innerHTML = catalogMessage('Loading products…', 'Fetching what is in stock right now.');
+    grid.innerHTML = catalogMessage(t('Loading products…'), t('Fetching what is in stock right now.'));
     return updateCatalogWa();
   }
   if (catalogStatus === 'error') {
-    grid.innerHTML = catalogMessage('We could not load the product list.', 'Check your connection, or reach us directly — we reply fast.');
+    grid.innerHTML = catalogMessage(t('We could not load the product list.'), t('Check your connection, or reach us directly — we reply fast.'));
     return updateCatalogWa();
   }
-  const items = PRODUCTS.filter(p => p.cat === state.cat);
+  const items = visibleProducts();
   if (!items.length) {
-    grid.innerHTML = catalogMessage('Nothing listed here yet.', 'We may still have it in the shop.');
+    grid.innerHTML = SEARCH.trim()
+      ? catalogMessage(`${t('No match for')} "${esc(SEARCH.trim())}".`, t('We may still have it in the shop — ask us.'), SEARCH.trim())
+      : catalogMessage(t('Nothing listed here yet.'), t('We may still have it in the shop.'));
     return updateCatalogWa();
   }
   const wa = BRANCHES[state.branch].whatsapp;
+  const askLink = (p) => `https://wa.me/${wa}?text=${encodeURIComponent('Hi Baraka Mini Hardware, is the ' + p.name + ' available? I would like a quote.')}`;
+  if (VIEW === 'list') {
+    grid.innerHTML = `<table class="price-table"><thead><tr><th>${t('Item')}</th><th class="hide-sm">${t('Size')}</th><th>${t('Price')}</th><th></th></tr></thead><tbody>
+      ${items.map(p => `<tr><td><b>${esc(p.name)}</b>${SEARCH ? `<div class="cat-chip">${esc(t(p.catLabel))}</div>` : ''}${availability(p)}</td>
+        <td class="hide-sm">${esc(p.size || '')}</td><td class="num">${priceHtml(p)}</td>
+        <td><button class="btn-reserve press" type="button" onclick="addToReservation(${Number(p.id)})">${t('Reserve')}</button></td></tr>`).join('')}
+      </tbody></table>`;
+    return updateCatalogWa();
+  }
   grid.innerHTML = items.map(p => `
     <div class="product-card">
       <div class="product-img">
         <div class="product-fill" style="background:${p.swatch}"></div>
-        <div class="product-meta">${esc(p.meta)}</div>
+        ${p.size ? `<div class="product-meta">${esc(p.size)}</div>` : ''}
       </div>
       <div class="product-body">
         <h3>${esc(p.name)}</h3>
+        <div class="price">${priceHtml(p)}</div>
         ${availability(p)}
         <p>${esc(p.detail)}</p>
-        <a class="btn-wa press" style="margin-top:10px; font-size:13px; padding:8px 14px;" target="_blank" rel="noreferrer" href="https://wa.me/${wa}?text=${encodeURIComponent('Hi Baraka Mini Hardware, is the ' + p.name + ' available? I would like a quote.')}">Ask about this item</a>
-        <button class="btn-reserve press" type="button" onclick="addToReservation(${Number(p.id)})">Reserve for pickup</button>
+        <a class="btn-wa press" style="margin-top:10px; font-size:13px; padding:8px 14px;" target="_blank" rel="noreferrer" onclick="logEvent('view', ${Number(p.id)})" href="${askLink(p)}">${t('Ask about this item')}</a>
+        <button class="btn-reserve press" type="button" onclick="addToReservation(${Number(p.id)})">${t('Reserve for pickup')}</button>
       </div>
     </div>
   `).join('');
@@ -751,7 +1024,7 @@ function renderProducts(){
 function updateCatalogWa(){
   const cat = CATEGORIES.find(c => c.id === state.cat);
   const b = BRANCHES[state.branch];
-  document.getElementById('catalogWaLabel').textContent = `Ask about ${cat.short}`;
+  document.getElementById('catalogWaLabel').textContent = `${t('Ask about')} ${t(cat.short)}`;
   const msg = encodeURIComponent(`Hi Baraka Mini Hardware, I'd like to ask about your ${cat.label} range.`);
   document.getElementById('catalogWaBtn').href = `https://wa.me/${b.whatsapp}?text=${msg}`;
 }
@@ -759,7 +1032,7 @@ function updateCatalogWa(){
 function renderItemGrid(){
   const wrap = document.getElementById('itemGrid');
   wrap.innerHTML = ITEM_TYPES.map(i =>
-    `<button class="opt-btn press ${i.id === state.itemId ? 'active' : ''}" onclick="setItem('${i.id}')">${i.label}</button>`
+    `<button class="opt-btn press ${i.id === state.itemId ? 'active' : ''}" onclick="setItem('${i.id}')">${esc(t(i.label))}</button>`
   ).join('');
 }
 
@@ -767,8 +1040,8 @@ function renderTierGrid(){
   const wrap = document.getElementById('tierGrid');
   wrap.innerHTML = MATERIAL_TIERS.map(t => `
     <button class="tier-btn press ${t.id === state.tierId ? 'active' : ''}" onclick="setTier('${t.id}')">
-      <span class="t-label">${t.label}</span>
-      <span class="t-note">${t.note}</span>
+      <span class="t-label">${esc(window.t(t.label))}</span>
+      <span class="t-note">${esc(window.t(t.note))}</span>
     </button>
   `).join('');
 }
@@ -782,24 +1055,68 @@ function updateCalc(){
   document.getElementById('qtyUnit').textContent = item.unit;
   document.getElementById('qtyVal').textContent = state.qty;
   document.getElementById('calcResult').innerHTML = `${meters}<span>m</span>`;
-  document.getElementById('calcDesc').innerHTML = `Approximate meters of <b>${tier.label}</b> for ${state.qty} × ${item.label.toLowerCase()}. Final yardage confirmed in-store against your actual frame or dimensions.`;
-  document.getElementById('sumItem').textContent = item.label;
-  document.getElementById('sumTier').textContent = tier.label;
+  document.getElementById('calcDesc').innerHTML = `${t('Approximate metres of')} <b>${esc(t(tier.label))}</b> ${t('for')} ${state.qty} × ${esc(t(item.label)).toLowerCase()}. ${t('Final length confirmed against your actual frame or measurements.')}`;
+
+  // Price from today's fabric price (sold per metre) plus the shop's labour price, when set in the admin.
+  const sel = document.getElementById('fabricSelect');
+  const fabric = sel && PRODUCTS.find(p => String(p.id) === sel.value);
+  const labourEach = Number(((window.SITE_INFO || {}).labour || {})[item.id]) || 0;
+  const perMetre = fabric && fabric.price > 0 && (fabric.unit === 'metre' || !fabric.unit);
+  const fabricCost = perMetre ? Math.round(meters * fabric.price) : 0;
+  const labour = labourEach * state.qty;
+  const box = document.getElementById('quoteBox');
+  QUOTE = { total: fabricCost + labour, fabricCost, labour, fabric, meters, item, tier };
+  if (box) {
+    box.hidden = !(fabric || labour);
+    box.innerHTML = `
+      ${fabric ? (perMetre ? `<div class="q-row"><span>${esc(fabric.name)} · ${meters} m × KES ${fabric.price.toLocaleString()}</span><span>KES ${fabricCost.toLocaleString()}</span></div>`
+        : `<div class="q-row"><span>${esc(fabric.name)}</span><span>${fabric.price > 0 ? `KES ${fabric.price.toLocaleString()} / ${esc(unitShort(fabric.unit))}` : esc(t('Ask for price'))}</span></div>`) : ''}
+      ${labour ? `<div class="q-row"><span>${t('Labour')} · ${state.qty} × KES ${labourEach.toLocaleString()}</span><span>KES ${labour.toLocaleString()}</span></div>`
+        : `<div class="q-row"><span>${t('Labour')}</span><span>${t('quoted on visit')}</span></div>`}
+      ${fabricCost + labour > 0 ? `<div class="q-total"><span>${t('Estimate')}</span><span>KES ${(fabricCost + labour).toLocaleString()}</span></div>` : ''}
+      <div class="q-note">${t('An estimate from today\'s prices. Foam, springs and transport are confirmed when we measure.')}</div>`;
+  }
+  document.getElementById('sumItem').textContent = t(item.label);
+  document.getElementById('sumTier').textContent = fabric ? fabric.name : t(tier.label);
   document.getElementById('sumQty').textContent = state.qty;
   document.getElementById('sumBranch').textContent = b.name;
 
   const waMsg = encodeURIComponent(
-    `Hi Baraka Mini Hardware, I'd like to check availability:\nItem: ${item.label} x${state.qty}\nMaterial: ${tier.label}\nEstimated need: ${meters} meters\nCould you confirm pricing and stock?`
+    `Hi Baraka Mini Hardware, I'd like a quote:\nItem: ${item.label} x${state.qty}\nMaterial: ${fabric ? fabric.name : tier.label}\nEstimated need: ${meters} metres${QUOTE.total ? `\nWebsite estimate: KES ${QUOTE.total.toLocaleString()}` : ''}\nCould you confirm pricing and stock?`
   );
   document.getElementById('calcWaBtn').href = `https://wa.me/${b.whatsapp}?text=${waMsg}`;
 }
 
+let QUOTE = {};
+let quoteLogged = false;
+function noteQuote(){ if (!quoteLogged) { quoteLogged = true; logEvent('quote', 'calculator'); } }
+
 /* ================= EVENT HANDLERS ================= */
 function setBranch(id){ state.branch = id; renderBranch(); renderProducts(); }
-function setCat(id){ state.cat = id; renderCatTabs(); renderProducts(); }
-function setItem(id){ state.itemId = id; renderItemGrid(); updateCalc(); }
-function setTier(id){ state.tierId = id; renderTierGrid(); updateCalc(); }
-function onQtyChange(){ state.qty = Number(document.getElementById('qtySlider').value); updateCalc(); }
+const CAT_PATHS = { mattress:'mattresses', fabric:'fabrics', leather:'leather', hardware:'hardware', other:'other-products' };
+const CAT_TITLES = { mattress:'Mattresses, foam & cushions', fabric:'Upholstery fabrics', leather:'Furniture leather', hardware:'Hardware', other:'Other products' };
+function setCat(id, fromUrl){
+  state.cat = id; SEARCH = '';
+  const box = document.getElementById('searchInput'); if (box) box.value = '';
+  renderCatTabs(); renderProducts();
+  document.title = `${CAT_TITLES[id]} — Baraka Mini Hardware, Kabarnet`;
+  setCanonical('/' + CAT_PATHS[id]);
+  if (!fromUrl) try { history.replaceState(null, '', '/' + CAT_PATHS[id]); } catch (e) {}
+}
+function setCanonical(path){
+  const link = document.querySelector('link[rel=canonical]');
+  if (link) link.href = 'https://barakamini-main-website.vercel.app' + path;
+}
+function setView(v){
+  VIEW = v;
+  document.getElementById('viewCards').classList.toggle('active', v === 'cards');
+  document.getElementById('viewList').classList.toggle('active', v === 'list');
+  try { localStorage.setItem('baraka_view', v); } catch (e) {}
+  renderProducts();
+}
+function setItem(id){ state.itemId = id; renderItemGrid(); updateCalc(); noteQuote(); }
+function setTier(id){ state.tierId = id; renderTierGrid(); updateCalc(); noteQuote(); }
+function onQtyChange(){ state.qty = Number(document.getElementById('qtySlider').value); updateCalc(); noteQuote(); }
 function scrollToId(id){ document.getElementById(id).scrollIntoView({ behavior:'smooth', block:'start' }); }
 function toggleMenu(){ document.getElementById('mobileMenu').classList.toggle('open'); }
 
@@ -898,7 +1215,7 @@ function availability(p){
 async function fetchLiveProducts(){
   try{
     const res = await fetch(
-      `${SUPABASE_URL}/rest/v1/products?select=id,name,category,price,image_url,description,size&order=name`,
+      `${SUPABASE_URL}/rest/v1/products?select=id,name,category,price,image_url,description,size,unit&order=name`,
       {
         signal: AbortSignal.timeout ? AbortSignal.timeout(10000) : undefined,
         headers: {
@@ -923,7 +1240,10 @@ async function fetchLiveProducts(){
           swatch: safeImageUrl(row.image_url)
             ? `url('${safeImageUrl(row.image_url)}') center/cover, ${FALLBACK_SWATCHES[i % FALLBACK_SWATCHES.length]}`
             : FALLBACK_SWATCHES[i % FALLBACK_SWATCHES.length],
-          meta: [row.size, Number(row.price) > 0 ? `KES ${Number(row.price).toLocaleString()}` : "Ask for price"].filter(Boolean).join(" · ")
+          price: Number(row.price) || 0,
+          unit: row.unit || '',
+          size: row.size || '',
+          catLabel: (CATEGORIES.find(c => c.id === catId) || {}).label || ''
         };
       })
       .filter(Boolean);
@@ -945,38 +1265,45 @@ function saveReservation(){
   const bar = document.getElementById('resBar');
   const n = RESERVATION.length;
   bar.hidden = n === 0;
-  bar.textContent = `Reservation (${n} item${n === 1 ? '' : 's'}) →`;
+  const total = reservationTotal();
+  bar.textContent = `${t('Reservation')} (${n})${total > 0 ? ` · KES ${total.toLocaleString()}` : ''} →`;
 }
-function addToReservation(id){
+function linePrice(r){ const p = PRODUCTS.find(x => x.id === r.id); return p ? p.price : Number(r.price) || 0; }
+function reservationTotal(){ return Math.round(RESERVATION.reduce((s, r) => s + linePrice(r) * Number(r.qty || 0), 0)); }
+function addToReservation(id, qty, quiet){
   const p = PRODUCTS.find(x => x.id === id);
   if (!p) return;
-  if (!RESERVATION.some(r => r.id === id)) RESERVATION.push({ id, name: p.name, qty: 1 });
+  const line = RESERVATION.find(r => r.id === id);
+  if (line) { if (qty) line.qty = qty; }
+  else RESERVATION.push({ id, name: p.name, qty: qty || 1, price: p.price, unit: p.unit });
+  logEvent('view', id);
   saveReservation();
-  openReservation();
+  if (!quiet) openReservation();
 }
 function closeReservation(){ document.getElementById('resModal').hidden = true; }
 function openReservation(message){
   const body = document.getElementById('resBody');
   const b = BRANCHES[state.branch];
   body.innerHTML = `
-    <p style="font-size:13.5px;color:rgba(59,42,32,.75);margin:6px 0 10px;">We keep these for you at <b>${esc(b.name)}</b>. Pay when you collect.</p>
-    ${RESERVATION.map((r, i) => `<div class="res-line"><span>${esc(r.name)}</span>
-      <input type="number" min="0.5" step="0.5" value="${r.qty}" aria-label="Quantity of ${esc(r.name)}" onchange="RESERVATION[${i}].qty=Math.max(0.5, Number(this.value)||1); saveReservation();">
+    <p style="font-size:13.5px;color:rgba(59,42,32,.75);margin:6px 0 10px;">${t('We keep these for you at')} <b>${esc(b.name)}</b>. ${t('Pay when you collect.')}</p>
+    ${RESERVATION.map((r, i) => `<div class="res-line"><span>${esc(r.name)}${linePrice(r) > 0 ? `<br><small style="color:rgba(59,42,32,.6)">KES ${linePrice(r).toLocaleString()}${r.unit ? ' / ' + esc(unitShort(r.unit)) : ''}</small>` : ''}</span>
+      <input type="number" min="0.5" step="0.5" value="${r.qty}" aria-label="Quantity of ${esc(r.name)}" onchange="RESERVATION[${i}].qty=Math.max(0.5, Number(this.value)||1); saveReservation(); document.getElementById('resTotal').textContent='KES '+reservationTotal().toLocaleString();">
       <button type="button" class="res-x" style="font-size:20px;" aria-label="Remove ${esc(r.name)}" onclick="RESERVATION.splice(${i},1); saveReservation(); RESERVATION.length ? openReservation() : closeReservation();">&times;</button></div>`).join('')}
-    <div class="res-field"><label for="resName">Your name</label><input id="resName" autocomplete="name" maxlength="80"></div>
-    <div class="res-field"><label for="resPhone">Phone (M-Pesa / WhatsApp)</label><input id="resPhone" type="tel" autocomplete="tel" placeholder="07xx xxx xxx" maxlength="15"></div>
-    <div class="res-field"><label for="resNote">When will you pick up? (optional)</label><input id="resNote" maxlength="200" placeholder="e.g. Saturday morning"></div>
+    ${reservationTotal() > 0 ? `<div class="res-total"><span>${t('Total at today\'s prices')}</span><span id="resTotal">KES ${reservationTotal().toLocaleString()}</span></div>` : ''}
+    <div class="res-field"><label for="resName">${t('Your name')}</label><input id="resName" autocomplete="name" maxlength="80"></div>
+    <div class="res-field"><label for="resPhone">${t('Phone (M-Pesa / WhatsApp)')}</label><input id="resPhone" type="tel" autocomplete="tel" placeholder="07xx xxx xxx" maxlength="15"></div>
+    <div class="res-field"><label for="resNote">${t('When will you pick up? (optional)')}</label><input id="resNote" maxlength="200" placeholder="${esc(t('e.g. Saturday morning'))}"></div>
     ${message ? `<div class="res-err">${esc(message)}</div>` : ''}
-    <button type="button" class="btn-gold-full press" id="resSend" onclick="sendReservation()">Reserve now</button>`;
+    <button type="button" class="btn-gold-full press" id="resSend" onclick="sendReservation()">${t('Reserve now')}</button>`;
   document.getElementById('resModal').hidden = false;
 }
 async function sendReservation(){
   const name = document.getElementById('resName').value.trim();
   const phone = document.getElementById('resPhone').value.trim();
   const note = document.getElementById('resNote').value.trim();
-  if (name.length < 2) return openReservationKeep('Please enter your name.', name, phone, note);
-  if (!/^(\+?254|0)?[17]\d{8}$/.test(phone.replace(/[\s-]/g, ''))) return openReservationKeep('Please enter a valid Kenyan phone number.', name, phone, note);
-  const btn = document.getElementById('resSend'); btn.disabled = true; btn.textContent = 'Sending…';
+  if (name.length < 2) return openReservationKeep(t('Please enter your name.'), name, phone, note);
+  if (!/^(\+?254|0)?[17]\d{8}$/.test(phone.replace(/[\s-]/g, ''))) return openReservationKeep(t('Please enter a valid Kenyan phone number.'), name, phone, note);
+  const btn = document.getElementById('resSend'); btn.disabled = true; btn.textContent = t('Sending…');
   try {
     const res = await fetch(`${SUPABASE_URL}/rest/v1/rpc/reserve_items`, {
       method: 'POST',
@@ -987,17 +1314,15 @@ async function sendReservation(){
     const data = await res.json().catch(() => ({}));
     if (!res.ok) {
       const msg = String(data.message || '');
-      throw new Error(msg.includes('TOO_MANY') ? 'You have already sent reservations recently — we will call you shortly.'
-        : msg.includes('BUSY') ? 'Many reservations right now — please try again in a few minutes or WhatsApp us.'
-        : msg.includes('PHONE') ? 'Please enter a valid Kenyan phone number.' : 'Could not send. Please WhatsApp us instead.');
+      throw new Error(rpcMessage(msg));
     }
     const ref = data.reservation || '';
     const items = RESERVATION.map(r => `${r.qty} × ${r.name}`).join(', ');
     RESERVATION = []; saveReservation();
     const b = BRANCHES[state.branch];
     document.getElementById('resBody').innerHTML = `
-      <p style="font-size:16px;margin:14px 0 6px;"><b>Reserved! Your number is ${esc(ref)}.</b></p>
-      <p style="font-size:14px;color:rgba(59,42,32,.8);">${esc(b.name)} will confirm on ${esc(phone)}. Pay when you collect.</p>
+      <p style="font-size:16px;margin:14px 0 6px;"><b>${t('Reserved! Your number is')} ${esc(ref)}.</b></p>
+      <p style="font-size:14px;color:rgba(59,42,32,.8);">${esc(b.name)} ${t('will confirm on')} ${esc(phone)}. ${t('Pay when you collect.')} ${t('Use your number and phone in "Track order" to check on it.')}</p>
       <a class="btn-gold-full press" target="_blank" rel="noreferrer" href="https://wa.me/${b.whatsapp}?text=${encodeURIComponent(`Hi Baraka Mini Hardware, I reserved ${items} (${ref}) on your website. My name is ${name}.`)}">Also tell us on WhatsApp</a>`;
   } catch (err) {
     openReservationKeep(err.message, name, phone, note);
@@ -1011,8 +1336,22 @@ document.getElementById('resModal').addEventListener('click', (e) => { if (e.tar
 document.addEventListener('keydown', (e) => { if (e.key === 'Escape') closeReservation(); });
 saveReservation();
 
+function rpcMessage(code){
+  return code.includes('TOO_MANY') ? t('You have already sent requests recently — we will call you shortly.')
+    : code.includes('BUSY') ? t('Many requests right now — please try again in a few minutes or WhatsApp us.')
+    : code.includes('PHONE') ? t('Please enter a valid Kenyan phone number.')
+    : code.includes('NAME') ? t('Please enter your name.') : t('Could not send. Please WhatsApp us instead.');
+}
+
 /* ================= INIT ================= */
 async function init(){
+  // /fabrics, /hardware … open that department (links Google can list).
+  const fromPath = Object.keys(CAT_PATHS).find(k => location.pathname.replace(/\/+$/, '') === '/' + CAT_PATHS[k]);
+  if (fromPath) { state.cat = fromPath; document.title = `${CAT_TITLES[fromPath]} — Baraka Mini Hardware, Kabarnet`; setCanonical('/' + CAT_PATHS[fromPath]); }
+  try { if (localStorage.getItem('baraka_view') === 'list') VIEW = 'list'; } catch (e) {}
+  document.getElementById('viewCards').classList.toggle('active', VIEW === 'cards');
+  document.getElementById('viewList').classList.toggle('active', VIEW === 'list');
+  if (window.beforeInit) window.beforeInit();
   // Everything except the product list draws immediately, even on a slow connection.
   renderBranch();
   renderCatTabs();
@@ -1022,14 +1361,19 @@ async function init(){
   updateCalc();
   initWordSwap();
 
+  if (fromPath) setTimeout(() => scrollToId('catalog'), 50);
+
   const [ok] = await Promise.all([fetchLiveProducts(), fetchBranchStock()]);
   catalogStatus = ok ? 'ready' : 'error';
   renderCatTabs();
   renderProducts();
+  saveReservation();
+  if (window.afterProducts) window.afterProducts();
 }
-init();
+document.addEventListener('DOMContentLoaded', init);
 document.getElementById('yearSpan').textContent = `© ${new Date().getFullYear()} Baraka Mini Hardware. All rights reserved.`;
 </script>
+<script src="/site.js"></script>
 
 </body>
 </html>

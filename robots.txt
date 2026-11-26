@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://barakamini-main-website.vercel.app/sitemap.xml
