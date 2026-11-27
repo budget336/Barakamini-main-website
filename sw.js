@@ -1,7 +1,7 @@
 /* Baraka West Mini Hardware website — works on a weak connection and offline.
    Pages and pictures: network first, last copy when offline.
    Product prices and stock: network first, last copy when offline (so the price list still opens). */
-const VERSION = 'baraka-site-v1';
+const VERSION = 'baraka-site-v2';
 const SHELL = ['/', '/site.js', '/manifest.webmanifest', '/icon-192.png', '/images/shop-front-sm.webp'];
 const DATA = 'baraka-site-data';
 const API = 'https://epvswsismwpkakztoijk.supabase.co/rest/v1/';

@@ -35,7 +35,8 @@ window.SW_DICT = {
   // departments and products
   'Mattresses & Cushions': 'Magodoro na Mito', 'Premium Fabrics': 'Vitambaa', 'Elite Furniture Leather': 'Ngozi ya fanicha',
   'Cabinetry & Joinery Hardware': 'Vifaa vya kabati na useremala', 'Other Products': 'Bidhaa nyingine',
-  'Offcut deals': 'Ofa za vipande', 'Offcuts': 'vipande', 'Mattresses': 'magodoro', 'Fabrics': 'vitambaa', 'Leather': 'ngozi', 'Hardware': 'vifaa',
+  'Offcut deals': 'Ofa za vipande', 'Offcuts': 'vipande', 'Popular now': 'Maarufu sasa', 'Offer': 'Ofa', 'Offers': 'Ofa',
+  'Review us on Google': 'Tupe nyota Google', 'Also review us on Google': 'Tupe nyota pia Google', 'Mattresses': 'magodoro', 'Fabrics': 'vitambaa', 'Leather': 'ngozi', 'Hardware': 'vifaa',
   'Ask for price': 'Uliza bei', 'Loading products…': 'Inapakia bidhaa…', 'Fetching what is in stock right now.': 'Tunaangalia kilichopo sasa.',
   'We could not load the product list.': 'Hatukuweza kupakia orodha ya bidhaa.',
   'Check your connection, or reach us directly — we reply fast.': 'Angalia mtandao wako, au wasiliana nasi moja kwa moja — tunajibu haraka.',
@@ -117,10 +118,52 @@ function toggleLang(){
 window.SITE_INFO = null;
 async function loadSiteInfo(){
   try { window.SITE_INFO = await rpc('site_info'); } catch (e) { window.SITE_INFO = null; }
-  renderSiteInfo(); updateCalc();
+  renderSiteInfo(); updateCalc(); renderBranch();
+}
+// Hours and phone numbers the owner set in the admin replace the ones built into the page.
+function hoursRows(open){
+  const fmt = (h) => h ? `${clock(h[0])} – ${clock(h[1])}` : t('Closed');
+  const wk = open.slice(1, 6).map(fmt);
+  const rows = wk.every(x => x === wk[0]) ? [['Mon – Fri', wk[0]]] : open.slice(1, 6).map((h, i) => [['Mon','Tue','Wed','Thu','Fri'][i], fmt(h)]);
+  return rows.concat([['Saturday', fmt(open[6])], ['Sunday', fmt(open[0])]]);
+}
+function applyBranchInfo(){
+  const info = (window.SITE_INFO || {}).branches || {};
+  Object.keys(BRANCHES).forEach(key => {
+    const x = info[key];
+    if (!x) return;
+    const b = BRANCHES[key];
+    if (Array.isArray(x.open) && x.open.length === 7) { b.open = x.open; b.hours = hoursRows(x.open); }
+    if (x.phone) { b.phoneDisplay = x.phone; b.phoneTel = '+254' + x.phone.replace(/\D/g, '').replace(/^(254|0)/, ''); }
+    if (x.whatsapp) b.whatsapp = x.whatsapp.replace(/\D/g, '');
+  });
+  document.querySelectorAll('[data-foot]').forEach(el => {
+    const b = BRANCHES[el.dataset.foot];
+    if (!b) return;
+    const ph = el.querySelector('.foot-phone'), hrs = el.querySelector('.foot-hours'), wa = el.querySelector('.foot-wa');
+    if (ph) { ph.href = 'tel:' + b.phoneTel; ph.lastChild.textContent = ' ' + b.phoneDisplay; }
+    if (hrs) hrs.innerHTML = b.hours.map(([d, h]) => `<div class="foot-hours-row"><span>${esc(t(d))}</span><span>${esc(h)}</span></div>`).join('');
+    if (wa) wa.href = 'https://wa.me/' + b.whatsapp;
+  });
+}
+function renderFeatured(){
+  const ids = ((window.SITE_INFO || {}).featured || []).map(Number);
+  const box = document.getElementById('featuredBox');
+  const items = ids.map(id => PRODUCTS.find(p => p.id === id)).filter(Boolean);
+  box.hidden = !items.length;
+  document.getElementById('featuredRow').innerHTML = items.map(p => `<div class="featured-card"><b>${esc(p.name)}</b>
+    <div class="price">${priceHtml(p)}</div>${availability(p)}
+    <button class="btn-reserve press" type="button" style="margin:8px 0 0;" onclick="addToReservation(${Number(p.id)})">${esc(t('Reserve'))}</button></div>`).join('');
 }
 function renderSiteInfo(){
   const info = window.SITE_INFO || {};
+  // Notice from the shop (e.g. closed on a holiday)
+  const nb = document.getElementById('noticeBar');
+  nb.hidden = !info.notice; nb.textContent = info.notice || '';
+  // Google reviews
+  ['footGoogle', 'reviewGoogle'].forEach(id => { const a = document.getElementById(id); if (a) { a.hidden = !info.google_review_url; if (info.google_review_url) a.href = info.google_review_url; } });
+  applyBranchInfo();
+  if (catalogStatus === 'ready') renderFeatured();
   // Deal of the week
   const bar = document.getElementById('dealBar');
   const d = info.deal;
@@ -354,7 +397,9 @@ async function sendReview(name){
   document.getElementById('rvSend').disabled = true;
   try {
     await rpc('submit_review', { p_token: REVIEW_TOKEN, p_rating: REVIEW_STARS, p_comment: comment });
-    openSiteModal(t('Rate us'), `<p style="font-size:15px;margin:14px 0;">${esc(t('Asante! Your review will appear once the shop has seen it.'))}</p>`);
+    const g = (window.SITE_INFO || {}).google_review_url;
+    openSiteModal(t('Rate us'), `<p style="font-size:15px;margin:14px 0;">${esc(t('Asante! Your review will appear once the shop has seen it.'))}</p>
+      ${g && REVIEW_STARS >= 4 ? `<a class="btn-gold-full press" href="${esc(g)}" target="_blank" rel="noreferrer">★ ${esc(t('Also review us on Google'))}</a>` : ''}`);
   } catch (err) {
     if (err.code === 'ALREADY') return openSiteModal(t('Rate us'), `<p style="font-size:14px;margin:12px 0;">${esc(t('You already sent a review recently — asante!'))}</p>`);
     showReviewForm(name, t('Could not send. Please WhatsApp us instead.'), comment);
@@ -368,7 +413,7 @@ window.beforeInit = function(){
   startReview();
   try { if (!sessionStorage.getItem('baraka_visit')) { sessionStorage.setItem('baraka_visit', '1'); logEvent('visit', 'site'); } } catch (e) {}
 };
-window.afterProducts = function(){ fillFabricSelect(); updateCalc(); };
+window.afterProducts = function(){ fillFabricSelect(); updateCalc(); renderFeatured(); };
 // Keep the "Open now" badge right if the page stays open.
 setInterval(() => { if (document.visibilityState === 'visible') renderBranch(); }, 5 * 60 * 1000);
 
