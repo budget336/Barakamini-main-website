@@ -1127,7 +1127,9 @@ function updateCalc(){
   const item = ITEM_TYPES.find(i => i.id === state.itemId);
   const tier = MATERIAL_TIERS.find(t => t.id === state.tierId);
   const b = BRANCHES[state.branch];
-  const meters = Math.round(item.base * tier.factor * state.qty * 10) / 10;
+  // The shop's own metres for this item (set in the admin), else the standard figure.
+  const ownBase = Number(((window.SITE_INFO || {}).metres || {})[item.id]);
+  const meters = Math.round((ownBase > 0 ? ownBase : item.base) * tier.factor * state.qty * 10) / 10;
 
   document.getElementById('qtyUnit').textContent = item.unit;
   document.getElementById('qtyVal').textContent = state.qty;
