@@ -148,7 +148,7 @@
   .swatch-caption{margin-top:12px;font-size:11px;text-transform:uppercase;letter-spacing:.16em;color:#8C6A4E;}
 
   /* ---------- branch toggle ---------- */
-  section.branches{padding:0 0 80px;scroll-margin-top:80px;}
+  section.branches{padding:0 20px 80px;scroll-margin-top:80px;}
   .section-title{font-weight:400;font-size:34px;margin:0 0 28px;}
   .toggle-group{display:inline-flex;padding:4px;border-radius:999px;background:var(--alabaster-deep);border:1px solid rgba(34,29,26,.1);margin-bottom:32px;}
   .toggle-btn{
@@ -223,7 +223,7 @@
   .catalog-cta{display:flex;justify-content:center;margin-top:40px;}
 
   /* ---------- calculator ---------- */
-  section.calc{padding:80px 0;scroll-margin-top:80px;}
+  section.calc{padding:80px 20px;scroll-margin-top:80px;}
   .calc-intro{font-size:15px;color:rgba(59,42,32,.7);max-width:640px;margin:0 0 40px;}
   .calc-card{display:grid;grid-template-columns:1.1fr .9fr;border-radius:16px;overflow:hidden;border:1px solid rgba(34,29,26,.1);box-shadow:0 20px 60px -30px rgba(34,29,26,.35);}
   .calc-left{background:var(--alabaster);padding:40px;}
@@ -261,7 +261,7 @@
   .btn-gold-full:hover{background:var(--copper);}
 
   /* ---------- partner hub ---------- */
-  section.partners{padding:80px 0;}
+  section.partners{padding:80px 20px;}
   .partner-grid{display:grid;grid-template-columns:.9fr 1.1fr;gap:56px;align-items:center;}
   .partner-grid h2{font-size:34px;line-height:1.15;margin:0 0 20px;}
   .partner-grid p{font-size:15px;line-height:1.7;color:rgba(59,42,32,.8);margin:0 0 32px;}
@@ -446,6 +446,12 @@
 .faq-item{background:#fff;border:1px solid rgba(34,29,26,.1);border-radius:12px;padding:12px 16px}
 .faq-item summary{cursor:pointer;font-weight:600;font-size:15px}
 .faq-item p{margin:8px 0 2px;font-size:14.5px;line-height:1.6;color:rgba(59,42,32,.85)}
+.news{padding-top:34px;padding-bottom:40px}
+.news .section-title{font-size:clamp(24px,4vw,34px);margin-bottom:14px}
+.news-row{display:grid;grid-auto-flow:column;grid-auto-columns:minmax(220px,1fr);gap:12px;overflow-x:auto;scroll-snap-type:x mandatory;padding-bottom:8px}
+.news-row button{border:0;padding:0;background:none;cursor:zoom-in;scroll-snap-align:start;border-radius:14px;overflow:hidden;aspect-ratio:4/5}
+.news-row img{width:100%;height:100%;object-fit:cover;display:block}
+.notice-bar a{color:inherit;text-decoration:underline;margin-left:6px;white-space:nowrap}
 </style>
 </head>
 <body>
@@ -525,6 +531,12 @@
 </section>
 
 <!-- ============ BRANCH TOGGLE ============ -->
+<section class="wrap news" id="news" hidden>
+  <div class="eyebrow"><span class="line"></span><span data-i18n="Just in">Just in</span></div>
+  <h2 class="section-title" id="newsTitle"></h2>
+  <div class="news-row" id="newsRow"></div>
+</section>
+
 <section class="branches wrap" id="branches">
   <div class="eyebrow"><span class="line"></span><span>Two Branches, One Standard</span></div>
   <h2 class="section-title">Choose your nearest showroom</h2>

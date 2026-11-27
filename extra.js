@@ -11,7 +11,7 @@ Object.assign(window.SW_DICT || {}, {
   'Get a bulk quote': 'Pata bei ya jumla', 'Organisation name': 'Jina la shirika', 'What do you need? (items and quantities)': 'Unahitaji nini? (bidhaa na idadi)',
   'When do you need it? (optional)': 'Unahitaji lini? (hiari)', 'Send request': 'Tuma ombi', 'Contact name': 'Jina la mhusika',
   'Request sent! Your number is': 'Ombi limetumwa! Nambari yako ni', 'We will call you with prices on': 'Tutakupigia na bei kwa',
-  'Pay a deposit': 'Lipa amana', 'Reserve for pickup': 'Hifadhi uchukue', 'Ask about this item': 'Uliza kuhusu bidhaa hii',
+  'Pay a deposit': 'Lipa amana', 'Just in': 'Mpya dukani', 'See photos': 'Ona picha', 'See photo': 'Ona picha', 'Reserve for pickup': 'Hifadhi uchukue', 'Ask about this item': 'Uliza kuhusu bidhaa hii',
 });
 const WHERE_HEARD = [['google', 'Google / Maps'], ['facebook', 'Facebook'], ['whatsapp', 'WhatsApp'], ['friend', 'Friend or family'], ['fundi', 'A fundi / carpenter'],
   ['poster', 'Poster or flyer'], ['radio', 'Radio'], ['passing', 'Passing the shop'], ['other', 'Other']];
@@ -156,7 +156,23 @@ function renderDeliveryPay(){
       <p>${esc(t('Cash, M-Pesa or bank at the counter. For big orders and sofa jobs we take a deposit — the rest when it is ready.'))}</p></div>`;
 }
 const _renderSiteInfoX = renderSiteInfo;
-renderSiteInfo = function (){ _renderSiteInfoX(); renderDeliveryPay(); };
+renderSiteInfo = function (){ _renderSiteInfoX(); renderDeliveryPay(); renderNews(); };
+
+/* ═══ Notice photos ("New fabrics just arrived" + pictures) ═══ */
+function renderNews(){
+  const info = window.SITE_INFO || {};
+  const box = document.getElementById('news');
+  if (!box) return;
+  const photos = (info.notice_photos || []).map(p => ({ url: safeImageUrl(p.url), caption: p.caption || '' })).filter(p => p.url);
+  box.hidden = !(info.notice && photos.length);
+  if (box.hidden) return;
+  document.getElementById('newsTitle').textContent = info.notice;
+  document.getElementById('newsRow').innerHTML = photos.map((p, i) => `<button type="button" data-photo="${i}" aria-label="${esc(t('See photo'))} ${i + 1}">
+    <img src="${esc(p.url)}" alt="${esc(p.caption || info.notice)}" loading="lazy" decoding="async"></button>`).join('');
+  document.getElementById('newsRow').onclick = (e) => { const b = e.target.closest('[data-photo]'); if (b) { const p = photos[Number(b.dataset.photo)]; openPhoto(p.url, p.caption || info.notice); } };
+  const nb = document.getElementById('noticeBar');
+  if (nb && !nb.querySelector('a')) nb.insertAdjacentHTML('beforeend', ` <a href="#news">${esc(t('See photos'))} ↓</a>`);
+}
 
 /* ═══ Seasonal banner (and /back-to-school, /christmas links for posters and Facebook) ═══ */
 function seasonFor(date){
