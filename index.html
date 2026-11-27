@@ -426,6 +426,7 @@
     .word-swap{transition:none;}
     .swatch-card:hover,.product-card:hover,.feature-card:hover{transform:none;}
   }
+.bulk-line{display:block;font-size:12px;font-weight:600;color:#2e7d32;margin-top:2px}
 </style>
 </head>
 <body>
@@ -872,7 +873,9 @@ function unitShort(u){ return UNIT_SHORT[u] || u || ''; }
 function priceHtml(p){
   if (!(p.price > 0)) return `<small>${esc(t('Ask for price'))}</small>`;
   return `KES ${p.price.toLocaleString()}${p.unit ? ` <small>/ ${esc(unitShort(p.unit))}</small>` : ''}` +
-    (p.onSale ? `<s class="was">KES ${p.wasPrice.toLocaleString()}</s><span class="offer-pill">${esc(t('Offer'))}</span>` : '');
+    (p.onSale ? `<s class="was">KES ${p.wasPrice.toLocaleString()}</s><span class="offer-pill">${esc(t('Offer'))}</span>` : '') +
+    // Bulk prices set in the admin, e.g. "10 m+: KES 750"
+    ((p.breaks || []).length ? `<span class="bulk-line">${p.breaks.map(b => `${esc(String(Number(b.min)))}${esc(unitShort(p.unit) ? ' ' + unitShort(p.unit) : '')}+: KES ${Number(b.price).toLocaleString()}`).join(' · ')}</span>` : '');
 }
 // Opening hours in Kenya time, whatever the visitor's phone clock says.
 function kenyaNow(){
@@ -1240,7 +1243,7 @@ function availability(p){
 async function fetchLiveProducts(){
   try{
     const res = await fetch(
-      `${SUPABASE_URL}/rest/v1/products?select=id,name,category,price,image_url,description,size,unit,parent_product_id,regular_price,sale_until&order=name`,
+      `${SUPABASE_URL}/rest/v1/products?select=id,name,category,price,image_url,description,size,unit,parent_product_id,regular_price,sale_until,price_breaks&order=name`,
       {
         signal: AbortSignal.timeout ? AbortSignal.timeout(10000) : undefined,
         headers: {
@@ -1270,6 +1273,7 @@ async function fetchLiveProducts(){
           // On offer: the normal price is kept in regular_price until the offer ends.
           onSale: Number(row.regular_price) > Number(row.price) && (!row.sale_until || row.sale_until >= new Date(Date.now() + 3 * 3600000).toISOString().slice(0, 10)),
           wasPrice: Number(row.regular_price) || 0,
+          breaks: (Array.isArray(row.price_breaks) ? row.price_breaks : []).filter(b => Number(b.price) > 0 && Number(b.price) < Number(row.price)).slice(0, 2),
           unit: row.unit || '',
           size: row.size || '',
           catLabel: (CATEGORIES.find(c => c.id === catId) || {}).label || ''
